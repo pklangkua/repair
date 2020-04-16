@@ -3,7 +3,7 @@ ob_start();
 //session_start();
 ?>
 
-<?php
+<?php 
 
 include("ldap.php");
  
@@ -46,7 +46,7 @@ if(isset($_GET['out'])) header("Location: index.php");*/
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.6">
-    <title>.:: Login ::.</title> 
+    <title>.:: Login ::.</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/sign-in/">
 
@@ -90,9 +90,9 @@ if(isset($_GET['out'])) header("Location: index.php");*/
 </head>
 
 <body class="text-center">
-    <div class="col-sm-3">
+    <div class="col-sm-4">
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="alert alert-dark" role="alert">
             <form class="form-signin" method="post" action="index.php">
                 <!-- <img class="mb-4" src="https://getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72"
@@ -114,8 +114,8 @@ if(isset($_GET['out'])) header("Location: index.php");*/
             </form>
         </div>
     </div>
-    <div class="col-sm-3">
-    </div </body>
+    <div class="col-sm-4">
+</body>
 
 </html>
 
@@ -123,7 +123,7 @@ if(isset($_GET['out'])) header("Location: index.php");*/
 
 if(isset($_SESSION['user'])) {
 	// user is not logged in, do something like redirect to login.php
-	header("Location: ../");
+	header("Location: ../index.php?module=");
 	die();
 }
 ?>

@@ -1,13 +1,9 @@
 <?php
-// initialize session
 ob_start();
-//session_start();
- 
-if(!isset($_SESSION['user'])) {
-	// user is not logged in, do something like redirect to login.php
-	header("Location: login/");
-	die();
-} ?>
+require_once("function.php");
+$chk = new checkLogin;
+$chk->chk_login();
+?>
 <!DOCTYPE html>
 <html lang="en">
 

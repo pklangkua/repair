@@ -1,4 +1,5 @@
 <?php
+ob_start();
 class connectDB{
     private $host = "localhost";
     private $user = "root";
@@ -52,7 +53,16 @@ class connectDB{
     }
 }
 
-
+class checkLogin
+{
+        public function chk_login()
+        {
+                if(isset($_SESSION['user'])=='') {
+                        // user is not logged in, do something like redirect to login.php
+                        header("Location: ../repair/login");
+                }
+        }
+}
 /*--------------------
 
 $conn = new connectDB;
