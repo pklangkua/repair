@@ -1,7 +1,8 @@
 <?php
-// initialize session
 ob_start();
-//session_start();
+require_once("../master/function.php");
+
+$conn = new connectDB;
  
 if(!isset($_SESSION['user'])) {
 	// user is not logged in, do something like redirect to login.php
@@ -9,7 +10,29 @@ if(!isset($_SESSION['user'])) {
 	die();
 }else
 {
-	header("Location: ../index.php?module=");
+	if(isset($_SESSION['user']) && isset($_SESSION['fullname'][0]))
+	{
+		$username = $_SESSION['user'];
+		$fullname = $_SESSION['fullname'][0];
+	}
+
+		$sSql = "SELECT * FROM r_user WHERE username = '$username'";
+		$arrData = $conn->return_sql($sSql);
+		$recCount = $conn->record_count($sSql);
+		if($recCount>0)
+		{
+			$sSql = "UPDATE r_user set lastvisit_login = NOW()";
+			$conn->exe($sSql);
+			header("Location: ../index.php?module=");
+		}else 
+		{
+			$sSql = "INSERT r_user (id,username,fullname,create_date) VALUES ('','$username','$fullname',NOW())";
+			$conn->exe($sSql);
+		
+			header("Location: ../index.php?module=");
+		}
+
+	
 }
  
 if($_SESSION['access'] != 2) {
@@ -20,11 +43,3 @@ if($_SESSION['access'] != 2) {
 	//header("Location: ./");
 }
 ?>
- 
-<p>Welcome <?= $_SESSION['user'] ?>!</p>
- 
-<p><strong>Secret Protected Content Here!</strong></p>
- 
-<p>Mary Had a Little Lamb</p>
- 
-<p><a href="index.php?out=1">Logout</a></p>

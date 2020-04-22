@@ -21,6 +21,9 @@ include ("master/head.php");
        else if($_GET["module"]=="durable")
        {
         include ("durable/durable.php");
+       }else if($_GET["module"]=="member")
+       {
+        include ("member/member.php");
        }
        else{
          echo "<br>";

@@ -1,7 +1,3 @@
-<?php
-//echo $_POST["email"];
-?>
-
 <div class="card border-light mb-3" style="max-width:">
     <div class="card-header">แจ้งซ่อม/เพิ่ม</div>
     <div class="card-body">

@@ -63,6 +63,44 @@ class checkLogin
                 }
         }
 }
+
+class CheckInternet  
+{
+        public function Chk_net()
+        {
+                if(!$sock = @fsockopen('www.google.com', 80))
+                {
+                        echo 'Not Connected';
+                }
+                else
+                {
+                        echo 'Connected';
+                }
+        }
+}
+class status  
+{
+        public function status()
+        {
+                        if(isset($_SESSION['user']) && isset($_SESSION['fullname'][0]))
+                {
+                        $username = $_SESSION['user'];
+                        $fullname = $_SESSION['fullname'][0];
+                }
+                $conn = new connectDB;
+                $sSql = "SELECT status_id FROM r_user WHERE username = '$username'";
+		$arrData = $conn->return_sql($sSql);
+		$recCount = $conn->record_count($sSql);
+                if($recCount>0){
+                        for ($sLoop=0;$sLoop<$recCount;$sLoop++){
+                                $status = $arrData[$sLoop][0] ;
+                        }
+                }
+                return $status;
+        }
+}
+
+
 /*--------------------
 
 $conn = new connectDB;

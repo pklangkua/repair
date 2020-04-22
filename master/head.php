@@ -3,6 +3,11 @@ ob_start();
 require_once("function.php");
 $chk = new checkLogin;
 $chk->chk_login();
+
+$status = new status;
+$status->status();
+$st = $status->status();
+//echo $status;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,23 +60,23 @@ $chk->chk_login();
                         งานซ่อม
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="?module=resive-repair">แจ้งซ่อม</a>
+                        <a class="dropdown-item" href="?module=resive-repair"   >แจ้งซ่อม</a>
                         <a class="dropdown-item" href="?module=history-repair">ติดตามการสั่งซ่อมของฉัน</a>
                         <a class="dropdown-item" href="?module=list-repair">รายการแจ้งซ่อม</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" <?php if($st==1){ echo 'style="display:true"';}else{ echo 'style="display:none"';}?>> <!-- style="display:none"-->
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                         สมาชิก
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">รายชื่อสมาชิก</a>
-                        <!--<a class="dropdown-item" href="#">Link 2</a>
+                        <a class="dropdown-item" href="?module=member">รายชื่อสมาชิก</a>
+                        <!--<a class="dropdown-item" href="#">Link 2</a> 
                         <a class="dropdown-item" href="#">Link 3</a> -->
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?module=durable">ครุภัณฑ์</a>
+                    <a class="nav-link" href="?module=durable" >ครุภัณฑ์</a>  <!-- style="display:none" -->
                 </li>
             </ul>
             
