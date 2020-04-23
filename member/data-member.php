@@ -21,73 +21,70 @@ $recCount2 = $conn->record_count($sSql2);
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
-
-<!-- Modal 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form method="post" action="" >
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<div id="myModal" class="modal modal-child fade addNewRequestModal" tabindex="-1" role="dialog"
-    aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Edit User Status</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="">
-                    <div class="form-group">
-                        <select class="form-control" id="sel1" name="sellist1">
-                            <?php  
-                            if($recCount2>0)
-                            {
-                                for ($sLoop=0;$sLoop<$recCount2;$sLoop++)
-                            {
-                            //print $arrData[$sLoop][0] . "-" .  $arrData[$sLoop][1] . "";
-                        ?>
-                            <option value="<?=$arrData2[$sLoop][0]?>"><?=$arrData2[$sLoop][1]?></option>
-                            <?php }}?>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="addDocument()" data-dismiss="modal">Save</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<form method="post" action="/repair/member/edit_status.php" name="frmEdit">
+    <div id="myModal" class="modal modal-child fade addNewRequestModal" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Edit User Status </h4>
+                </div>
+                        <div class="modal-body">
+                            
+                                        <div class="form-group">
+                                            <select class="form-control" name="sellist1">
+                                                <?php  
+                                                if($recCount2>0)
+                                                {
+                                                    for ($sLoop=0;$sLoop<$recCount2;$sLoop++)
+                                                {
+                                                //print $arrData[$sLoop][0] . "-" .  $arrData[$sLoop][1] . "";
+                                            ?>
+                                                <option value="<?=$arrData2[$sLoop][0]?>"><?=$arrData2[$sLoop][1]?></option>
+                                                <?php }}?>
+                                            </select>
+                                        </div>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="id" id="id" />
+                                    <input type="submit" class="btn btn-primary" value="Save">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
             </div>
         </div>
     </div>
-</div>
+
+
+</form>
+
+<form method="post" action="/repair/member/deleteUser.php" name="frmDelete">
+    <div id="DeleteModal" class="modal modal-child fade addNewRequestModal" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete User </h4>
+                </div>
+                <div class="modal-body">
+                    <h6>หากคุณต้องการที่จะลบให้กด Delete</h6>                                
+                </div>
+                <div class="modal-footer">  
+                    <input type="hidden" name="idDelete" id="idDelete" />
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>                
+            </div>
+        </div>
+    </div>
+
+
+</form>
 
 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
     <thead>
         <tr>
-            <th>ID</th>
+            <th>ลำดับ</th>
             <th>ชื่อ-นามสกุล</th>
             <th>วันที่เข้าใช้งาน</th>
             <th>วันที่เข้าใช้งานล่าสุด</th>
@@ -104,7 +101,7 @@ $recCount2 = $conn->record_count($sSql2);
 		//print $arrData[$sLoop][0] . "-" .  $arrData[$sLoop][1] . "";
     ?>
         <tr>
-            <td><?=$arrData[$sLoop][0]?></td>
+            <td><?=$sLoop+1?></td>
             <td><?=$arrData[$sLoop][1]?></td>
             <td><?=$arrData[$sLoop][3]?></td>
             <td><?=$arrData[$sLoop][2]?></td>
@@ -124,16 +121,15 @@ $recCount2 = $conn->record_count($sSql2);
             ?>
             </td>
             <td>
-                <button type="submit" class="btn btn-primary btn-sm update_data" data-toggle="modal" data-target="#myModal" id="<?=$arrData[$sLoop][0]?>">สถานะ</button>
-                <input type="button" data-toggle="modal" name="edit" value="Edit" id="<?php echo $row["id"]; ?>" class="btn btn-info btn-sm edit_data" data-target="#myModal" />
-                <button type="button" class="btn btn-danger btn-sm">ลบ</button>
-            </td>
-        </tr>
+                <button type="button" class="btn btn-primary btn-sm  edit" data-toggle="modal" data-target="#myModal" id="<?=$arrData[$sLoop][0]?>">สถานะ</button>
+                <button type="button" class="btn btn-danger btn-sm delete" data-toggle="modal" data-target="#DeleteModal" id="<?=$arrData[$sLoop][0]?>">ลบ</button>
+            </td> 
+        </tr> 
         <?php }}?>
     </tbody>
     <tfoot>
         <tr>
-            <th>ID</th>
+            <th>ลำดับ</th>
             <th>ชื่อ-นามสกุล</th>
             <th>วันที่เข้าใช้งาน</th>
             <th>วันที่เข้าใช้งานล่าสุด</th>
@@ -146,21 +142,18 @@ $recCount2 = $conn->record_count($sSql2);
 <script>
 $(document).ready(function() {
     $('#example').DataTable();
-    $('.update_data').click(function(){//เมื่อมีการกดปุ่ม view_data
-        var uid=$(this).attr("id");//รับค่า id จากปุ่มวิวมาใส่ไว้ใน uid
-        $.ajax({
-          url:"fetch.php",
-          method:"post",
-          data:{id:uid},
-          dataType:"json",
-          success:function(data){
-            $('#id').val(data.id);
-            $('#fname').val(data.fullname);
-            $('#insert').val("Update");//เปลี่ยนข้อมความในปุ่ม insert เป็น Update
-            $('#addModal').modal('show');
-          }
-        });
-      });
+
+    $('.edit').on('click',function(){
+        var uid=$(this).attr("id");
+        $('#id').val(uid);
+    });
+
+    $('.delete').on('click',function(){
+        var uid=$(this).attr("id");
+        $('#idDelete').val(uid);
+    });
+
+
 });
 </script>
 

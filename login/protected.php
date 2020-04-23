@@ -21,12 +21,12 @@ if(!isset($_SESSION['user'])) {
 		$recCount = $conn->record_count($sSql);
 		if($recCount>0)
 		{
-			$sSql = "UPDATE r_user set lastvisit_login = NOW()";
+			$sSql = "UPDATE r_user set lastvisit_login = NOW() WHERE username ='$username'";
 			$conn->exe($sSql);
 			header("Location: ../index.php?module=");
 		}else 
 		{
-			$sSql = "INSERT r_user (id,username,fullname,create_date) VALUES ('','$username','$fullname',NOW())";
+			$sSql = "INSERT r_user (id,username,fullname,create_date,lastvisit_login) VALUES ('','$username','$fullname',NOW(),NOW())";
 			$conn->exe($sSql);
 		
 			header("Location: ../index.php?module=");
