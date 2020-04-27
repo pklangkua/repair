@@ -22,10 +22,11 @@ function authenticate($user, $password){
 		// valid
 		// check presence in groups
 		$filter = "(sAMAccountName=".$user.")";
-		$attr = array("memberof","displayName");
+		$attr = array("memberof","displayName","description");
 		$result = ldap_search($ldap, $ldap_dn, $filter, $attr) or exit("Unable to search LDAP server");
 		$entries = ldap_get_entries($ldap, $result);
 		$displayName = $entries[0]['displayname'];
+		$department = $entries[0]['description'];
        // $surname = $entries[0]['sn'];
 		ldap_unbind($ldap);
  
@@ -45,6 +46,7 @@ function authenticate($user, $password){
 			$_SESSION['user'] = $user;
 			$_SESSION['access'] = $access;
 			$_SESSION['fullname'] = $displayName;
+			$_SESSION['department'] = $department;
 			return true;
 		} else {
 			// user has no rights

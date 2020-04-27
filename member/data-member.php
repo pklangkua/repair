@@ -5,7 +5,7 @@ require_once("master/function.php");
 $conn = new connectDB;
 
 $sSql = "SELECT r_user.id,r_user.fullname,r_user.lastvisit_login,r_user.create_date,
-r_user.active,r_user.status_id,r_status.`status`from r_user LEFT JOIN r_status on r_status.id = r_user.status_id";
+r_user.active,r_user.status_id,r_status.`status`,r_user.department from r_user LEFT JOIN r_status on r_status.id = r_user.status_id";
 $arrData = $conn->return_sql($sSql);
 $recCount = $conn->record_count($sSql);
 
@@ -86,6 +86,7 @@ $recCount2 = $conn->record_count($sSql2);
         <tr>
             <th>ลำดับ</th>
             <th>ชื่อ-นามสกุล</th>
+            <th>หน่วยงาน</th>
             <th>วันที่เข้าใช้งาน</th>
             <th>วันที่เข้าใช้งานล่าสุด</th>
             <th>สถานะ</th>
@@ -103,6 +104,7 @@ $recCount2 = $conn->record_count($sSql2);
         <tr>
             <td><?=$sLoop+1?></td>
             <td><?=$arrData[$sLoop][1]?></td>
+            <td><?=$arrData[$sLoop][7]?></td>
             <td><?=$arrData[$sLoop][3]?></td>
             <td><?=$arrData[$sLoop][2]?></td>
             <td>
@@ -131,6 +133,7 @@ $recCount2 = $conn->record_count($sSql2);
         <tr>
             <th>ลำดับ</th>
             <th>ชื่อ-นามสกุล</th>
+            <th>หน่วยงาน</th>
             <th>วันที่เข้าใช้งาน</th>
             <th>วันที่เข้าใช้งานล่าสุด</th>
             <th>สถานะ</th>

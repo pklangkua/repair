@@ -53,7 +53,7 @@ $st = $status->status();
         <div class="collapse navbar-collapse " id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="?module=">หน้าหลัก</a>
+                    <a class="nav-link" href="?module=" >หน้าหลัก</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -65,19 +65,20 @@ $st = $status->status();
                         <a class="dropdown-item" href="?module=list-repair">รายการแจ้งซ่อม</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?module=durable" >ครุภัณฑ์</a>  <!-- style="display:none" -->
+                </li>
                 <li class="nav-item dropdown" <?php if($st==1){ echo 'style="display:true"';}else{ echo 'style="display:none"';}?>> <!-- style="display:none"-->
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                         สมาชิก
                     </a>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu"> 
                         <a class="dropdown-item" href="?module=member">รายชื่อสมาชิก</a>
                         <!--<a class="dropdown-item" href="#">Link 2</a> 
-                        <a class="dropdown-item" href="#">Link 3</a> -->
+                        <a class="dropdown-item" href="#">Link 3</a>--> 
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="?module=durable" >ครุภัณฑ์</a>  <!-- style="display:none" -->
-                </li>
+                
             </ul>
             
         </div>
@@ -96,7 +97,7 @@ $st = $status->status();
                         <a class="dropdown-item" href="?module=">โปรไฟล์</a>
                         <a class="dropdown-item" href="?module=">ออกจากระบบ</a>
                     </div>-->
-                    <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-menu dropdown-menu-right"> 
                         <a class="dropdown-item" href="?module=">โปรไฟล์</a>
                         <a class="dropdown-item" href="login/index.php?out=1">ออกจากระบบ</a>
                         <!--<button class="dropdown-item" type="button">Action</button>

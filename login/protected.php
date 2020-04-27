@@ -10,10 +10,11 @@ if(!isset($_SESSION['user'])) {
 	die();
 }else
 {
-	if(isset($_SESSION['user']) && isset($_SESSION['fullname'][0]))
+	if(isset($_SESSION['user']) && isset($_SESSION['fullname'][0]) && isset($_SESSION['department']))
 	{
 		$username = $_SESSION['user'];
 		$fullname = $_SESSION['fullname'][0];
+		$department = $_SESSION['department'][0];
 	}
 
 		$sSql = "SELECT * FROM r_user WHERE username = '$username'";
@@ -21,12 +22,13 @@ if(!isset($_SESSION['user'])) {
 		$recCount = $conn->record_count($sSql);
 		if($recCount>0)
 		{
-			$sSql = "UPDATE r_user set lastvisit_login = NOW() WHERE username ='$username'";
+			$sSql = "UPDATE r_user set lastvisit_login = NOW(),department='$department' WHERE username ='$username'";
+			//echo $sSql;
 			$conn->exe($sSql);
 			header("Location: ../index.php?module=");
 		}else 
 		{
-			$sSql = "INSERT r_user (id,username,fullname,create_date,lastvisit_login) VALUES ('','$username','$fullname',NOW(),NOW())";
+			$sSql = "INSERT r_user (id,username,fullname,create_date,lastvisit_login,department) VALUES ('','$username','$fullname',NOW(),NOW(),'$department' )";
 			$conn->exe($sSql);
 		
 			header("Location: ../index.php?module=");
