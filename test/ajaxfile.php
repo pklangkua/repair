@@ -1,42 +1,35 @@
 <?php
-include "config.php";
+    $host = "localhost"; /* Host name */
+    $user = "root"; /* User */
+    $password = ""; /* Password */
+    $dbname = "repair"; /* Database name */
+    
+    $con = mysqli_connect($host, $user, $password,$dbname);
+    // Check connection
+    if (!$con) {
+     die("Connection failed: " . mysqli_connect_error());
+    }
+     if(isset($_POST["sCusID"]) && isset($_POST["eMail"]))
+     {
+       $sCusID = $_POST["sCusID"];
+       $eMail = $_POST["eMail"];
+     }
 
-$userid = $_POST['userid'];
-
-$sql = "select * from employee where id=".$userid;
-$result = mysqli_query($con,$sql);
-
-$response = "<table border='0' width='100%'>";
-while( $row = mysqli_fetch_array($result) ){
- $id = $row['id'];
- $emp_name = $row['emp_name'];
- $salary = $row['salary'];
- $gender = $row['gender'];
- $city = $row['city'];
- $email = $row['email'];
- 
- $response .= "<tr>";
- $response .= "<td>Name : </td><td>".$emp_name."</td>";
- $response .= "</tr>";
-
- $response .= "<tr>";
- $response .= "<td>Salary : </td><td>".$salary."</td>";
- $response .= "</tr>";
-
- $response .= "<tr>";
- $response .= "<td>Gender : </td><td>".$gender."</td>";
- $response .= "</tr>";
-
- $response .= "<tr>";
- $response .= "<td>City : </td><td>".$city."</td>";
- $response .= "</tr>";
-
- $response .= "<tr>"; 
- $response .= "<td>Email : </td><td>".$email."</td>"; 
- $response .= "</tr>";
-
-}
-$response .= "</table>";
-
-echo $response;
-exit;
+	$strSQL = "SELECT * FROM customer WHERE  CustomerID = '$sCusID' OR Email = '$eMail' ";
+	$objQuery = mysqli_query($con,$strSQL) or die (mysqli_error());
+	$intNumField = mysqli_num_fields($objQuery);
+	$resultArray = array();
+	while($obResult = mysqli_fetch_array($objQuery))
+	{
+		$arrCol = array();
+		for($i=0;$i<$intNumField;$i++)
+		{
+			$arrCol[mysqli_field_name($objQuery,$i)] = $obResult[$i];
+		}
+		array_push($resultArray,$arrCol);
+	}
+	
+	//mysqli_close($objConnect);
+	
+	echo json_encode($resultArray);
+?>

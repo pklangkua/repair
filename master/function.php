@@ -17,10 +17,9 @@ class connectDB{
                             $message  = 'DB CONNECT ERROR : ' . mysqli_connect_errno();
                             die($message);
                     }
-            mysqli_set_charset($this->mysqli,"utf8");
+            mysqli_set_charset($this->mysqli,"utf8");  
             return $this->mysqli;
-    }
-    
+    }  
     public function return_sql($sql){
             $result = $this->mysqli->query($sql);
                     if ($result){

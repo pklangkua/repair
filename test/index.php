@@ -1,89 +1,79 @@
-<?php 
-include "config.php";
-?>
-<!doctype html>
 <html>
-
 <head>
-    <!-- CSS -->
-    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-    <!-- Script -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
+<title>ThaiCreate.Com</title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$("#txtCustomerID,#txtEmail").change(function(){
+
+			$("#sCusID").empty();
+			$("#sEmail").empty();
+
+			$.ajax({ 
+				url: "ajaxfile.php" ,
+				type: "POST",
+				data: 'sCusID=' +$("#txtCustomerID").val()+'&eMail='+$("#txtEmail").val()
+			})
+			.success(function(result) { 
+
+					var obj = jQuery.parseJSON(result);
+
+					if(obj != '')
+					{
+						  $.each(obj, function(key, inval) {
+
+								   if($("#txtCustomerID").val() == inval["CustomerID"])
+								  {
+									   $("#sCusID").html(" <font color='red'>รหัสลูกค้านี้มีอยู่แล้ว</font>");
+								  }
+
+								   if($("#txtEmail").val() == inval["Email"])
+								  {
+									   $("#sEmail").html(" <font color='red'>อีเมล์นี้มีอยู่แล้ว</font>");
+								  }
+
+						  });
+					}
+
+			});
+
+		});
+	});
+</script>
 </head>
-
 <body>
-    <div class="container">
-        <!-- Modal -->
-        <div class="modal fade" id="empModal" role="dialog">
-            <div class="modal-dialog">
+<h2>jQuery ตรวจสอบข้อมูลซ้ำ</h2>
+<table width="399" border="1">
+  <tr>
+    <td width="114">CustomerID <font color="red">*</font></td>
+    <td width="309"><input type="text" id="txtCustomerID" name="txtCustomerID" size="5">
+	<span id="sCusID"></span>
+	</td>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td><input type="text" id="txtName" name="txtName" size="20"></td>
+  </tr>
+  <tr>
+    <td>Email <font color="red">*</font></td>
+    <td><input type="text" id="txtEmail" name="txtEmail" size="25">
+	<span id="sEmail"></span>
+	</td>
+  </tr>
+  <tr>
+    <td>CountryCode</td>
+    <td><input type="text" id="txtCountryCode" name="txtCountryCode" size="2"></td>
+  </tr>
+  <tr>
+    <td>Budget</td>
+    <td><input type="text" id="txtBudget" name="txtBudget" size="5"></td>
+  </tr>
+  <tr>
+    <td>Used</td>
+    <td><input type="text" id="txtUsed" name="txtUsed" size="5"></td>
+  </tr>
+</table>
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">User Info</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <br />
-        <table border='1' style='border-collapse: collapse;'>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>&nbsp;</th>
-            </tr>
-            <?php 
-   $query = "select * from employee";
-   $result = mysqli_query($con,$query);
-   while($row = mysqli_fetch_array($result)){
-     $id = $row['id'];
-     $name = $row['emp_name'];
-     $email = $row['email'];
-
-     echo "<tr>";
-     echo "<td>".$name."</td>";
-     echo "<td>".$email."</td>";
-     echo "<td><button data-id='".$id."' class='userinfo'>Info</button></td>";
-     echo "</tr>";
-   }
-   ?>
-        </table>
-
-    </div>
-    <script>
-    $(document).ready(function() {
-
-        $('.userinfo').click(function() {
-
-            var userid = $(this).data('id');
-
-            // AJAX request
-            $.ajax({
-                url: 'ajaxfile.php',
-                type: 'post',
-                data: {
-                    userid: userid
-                },
-                success: function(response) {
-                    // Add response in Modal body
-                    $('.modal-body').html(response);
-
-                    // Display Modal
-                    $('#empModal').modal('show');
-                }
-            });
-        });
-    });
-    </script>
 </body>
-
 </html>
