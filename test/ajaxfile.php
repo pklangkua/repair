@@ -1,35 +1,19 @@
-<?php
-    $host = "localhost"; /* Host name */
-    $user = "root"; /* User */
-    $password = ""; /* Password */
-    $dbname = "repair"; /* Database name */
-    
-    $con = mysqli_connect($host, $user, $password,$dbname);
-    // Check connection
-    if (!$con) {
-     die("Connection failed: " . mysqli_connect_error());
-    }
-     if(isset($_POST["sCusID"]) && isset($_POST["eMail"]))
-     {
-       $sCusID = $_POST["sCusID"];
-       $eMail = $_POST["eMail"];
-     }
-
-	$strSQL = "SELECT * FROM customer WHERE  CustomerID = '$sCusID' OR Email = '$eMail' ";
-	$objQuery = mysqli_query($con,$strSQL) or die (mysqli_error());
-	$intNumField = mysqli_num_fields($objQuery);
-	$resultArray = array();
-	while($obResult = mysqli_fetch_array($objQuery))
-	{
-		$arrCol = array();
-		for($i=0;$i<$intNumField;$i++)
-		{
-			$arrCol[mysqli_field_name($objQuery,$i)] = $obResult[$i];
-		}
-		array_push($resultArray,$arrCol);
-	}
-	
-	//mysqli_close($objConnect);
-	
-	echo json_encode($resultArray);
-?>
+<?php  
+	header('content-type: text/html; charset: utf-8');
+	if(!empty($_GET["term"])){
+	$connect=mysql_connect('localhost','root','root');
+        mysql_select_db('salespro');
+        mysql_query('SET NAMES utf8');
+	mysql_query("SET character_set_results=utf8");
+	mysql_query("SET character_set_client=utf8");
+	mysql_query("SET character_set_connection=utf8");
+        $param = $_GET["term"];  
+        $query = mysql_query("SELECT * FROM customer WHERE Customer_Code LIKE '%$param%' "); 
+        for ($x = 0, $numrows = 10; $x < $numrows; $x++) {  
+        $row = mysql_fetch_assoc($query);  
+        $employee[$x] = array("id" => $row["Customer_Code"],"custname" => $row["Customer_Name"],"address1"=>$row['Address1'],"address2"=>$row['Address2'],"address3"=>$row['Address3'],"address4"=>$row['Address4'],"city"=>$row['City'],"zipcode"=>$row['Zip_Code'],"phone1"=>$row['Tel_No'],"phone2"=>$row['Fax_No']); } 
+    $response = json_encode($employee); 
+	echo $response; 
+	mysql_close($connect);
+}
+?>  

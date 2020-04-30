@@ -30,7 +30,6 @@ $recCount = $conn2->record_count($sSql);
         $i=1;
     }else
     {
-
         $stmt = "SELECT h.*,ht.HardwareTypeName,htg.HardwareTypeGroupName,
         dbo.Office.OfficeName
         FROM
