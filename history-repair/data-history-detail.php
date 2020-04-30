@@ -30,8 +30,7 @@
                                 </li>
                             </ul>
                     </div>
-
-                    <br><br>
+<br>
                     <?php include("history.php")?>
                     <div class="col-sm-2">
                     </div>

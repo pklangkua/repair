@@ -78,6 +78,7 @@ class CheckInternet
                 }
         }
 }
+
 class status  
 {
         public function status()
