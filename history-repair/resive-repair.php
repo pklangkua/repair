@@ -1,3 +1,45 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   <link rel="stylesheet" href="test/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+  <script>
+ $(document).ready(function() {
+  
+    $( "#autocomplete" ).autocomplete({
+      //source: availableTags
+
+      source: function( request, response ) {
+                
+                $.ajax({
+                    url: "history-repair/fetchData.php",
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        search: request.term
+                    },
+                    success: function( data ) {
+                        response( data);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                $('#autocomplete').val(ui.item.label); // display the selected text
+                $('#selectuser_id').val(ui.item.value); // save selected id to input
+                return false;
+            }
+        
+
+    });
+  } );
+  </script>
+
 <div class="card border-light mb-3" style="max-width:">
     <div class="card-header">แจ้งซ่อม/เพิ่ม</div>
     <div class="card-body">
@@ -14,11 +56,11 @@
                         <form method="post" action="?module=resive-repair">
                             <div class="form-group">
                                 <label for="comment" class="mr-sm-2"> พัสดุ </label>
-                                <input  type="text" class="form-control mr-sm-2" name="email"
-                                    placeholder="ค้นหาพัสดุโดย พัสดุ, หมายเลขเครื่อง/เลขทะเบียน">
+                                <input type="text" class="form-control mr-sm-2" name="email"
+                                    placeholder="ค้นหาพัสดุโดย ชื่อ,เลขทะเบียน" id="autocomplete">
                                 <br><label class="mr-sm-2">เลขทะเบียน </label>
-                                <input  type="password" class="form-control" name="password"
-                                    placeholder="เลขทะเบียน">
+                                <input type="text" class="form-control" name="password" placeholder="เลขทะเบียน"
+                                    id="selectuser_id">
                             </div>
                             <div class="form-group">
                                 <br>
@@ -28,15 +70,15 @@
                             <div class="form-group">
                                 <br><label class="mr-sm-2">หมายเหตุ </label>
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input  type="password" class="form-control" name="password"
+                                <input type="password" class="form-control" name="password"
                                     placeholder="คำอธิบายหรือหมายเหตุเพิ่มเติม">
                             </div>
                             <div class="row">
                                 <div class="col-sm-5">
                                 </div>
                                 <div class="col-sm-2">
-                                <button type="submit" class="btn btn-success">บันทึกข้อมูล</button>
-                            </div>
+                                    <button type="submit" class="btn btn-success">บันทึกข้อมูล</button>
+                                </div>
                                 <div class="col-sm-5">
                                 </div>
                             </div>
@@ -50,3 +92,18 @@
         </div>
     </div>
 </div>
+<script type='text/javascript'>
+$(document).ready(function() {
+    $(function() {
+        
+    })
+})
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>

@@ -26,7 +26,6 @@ $st = $status->status();
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"> -->
 
     <!-- END Datatable-->
-
     <title>DMH Repair</title>
 
 </head>
@@ -67,6 +66,9 @@ $st = $status->status();
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="?module=durable" >ครุภัณฑ์</a>  <!-- style="display:none" -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?module=test" style="display:none" >test</a>  <!-- style="display:none" -->
                 </li>
                 <li class="nav-item dropdown" <?php if($st==1){ echo 'style="display:true"';}else{ echo 'style="display:none"';}?>> <!-- style="display:none"-->
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">

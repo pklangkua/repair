@@ -25,6 +25,10 @@ include ("master/head.php");
        {
         include ("member/member.php");
        }
+       else if($_GET["module"]=="test")
+       {
+        include ("test/autocomplete_test.php");
+       }
        else{
          echo "<br>";
        include ("card.php");
