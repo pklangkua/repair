@@ -88,15 +88,34 @@ class status
                         $fullname = $_SESSION['fullname'][0];
                 }
                 $conn = new connectDB;
-                $sSql = "SELECT status_id FROM r_user WHERE username = '$username'";
+                $sSql = "SELECT status_id,OfficeID FROM r_user WHERE username = '$username'";
 		$arrData = $conn->return_sql($sSql);
 		$recCount = $conn->record_count($sSql);
                 if($recCount>0){
                         for ($sLoop=0;$sLoop<$recCount;$sLoop++){
                                 $status = $arrData[$sLoop][0] ;
+                                $OfficeID = $arrData[$sLoop][1] ;
                         }
                 }
                 return $status;
+        }
+        public function OfficeID()
+        {
+                        if(isset($_SESSION['user']) && isset($_SESSION['fullname'][0]))
+                {
+                        $username = $_SESSION['user'];
+                        $fullname = $_SESSION['fullname'][0];
+                }
+                $conn = new connectDB;
+                $sSql = "SELECT OfficeID FROM r_user WHERE username = '$username'";
+		$arrData = $conn->return_sql($sSql);
+		$recCount = $conn->record_count($sSql);
+                if($recCount>0){
+                        for ($sLoop=0;$sLoop<$recCount;$sLoop++){
+                                $OfficeID = $arrData[$sLoop][0] ;
+                        }
+                }
+                return $OfficeID;
         }
 }
 

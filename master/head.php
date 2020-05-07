@@ -5,9 +5,11 @@ $chk = new checkLogin;
 $chk->chk_login();
 
 $status = new status;
-$status->status();
+//$status->status(); 
+$OfficeID = $status->OfficeID();
 $st = $status->status();
-//echo $status;
+$_SESSION['status'] = $st;
+$_SESSION['OfficeID'] = $OfficeID;
 ?>
 <!DOCTYPE html>
 <html lang="en">
