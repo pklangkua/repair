@@ -63,7 +63,7 @@ $_SESSION['OfficeID'] = $OfficeID;
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="?module=resive-repair"   >แจ้งซ่อม</a>
                         <a class="dropdown-item" href="?module=history-repair">ติดตามการสั่งซ่อมของฉัน</a>
-                        <a class="dropdown-item" href="?module=list-repair">รายการแจ้งซ่อม</a>
+                        <a class="dropdown-item" href="?module=list-repair" <?php if($st==3){ echo 'style="display:none"';}?>>รายการแจ้งซ่อม</a>
                     </div>
                 </li>
                 <li class="nav-item">

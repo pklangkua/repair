@@ -119,6 +119,45 @@ class status
         }
 }
 
+class category
+{
+        public function cat_chk($data)
+        {
+                if($data==1)
+                {
+                        echo "<span class='badge badge-danger' >แจ้งซ่อม<span>";
+                }else if($data==2)
+                {
+                        echo "<span class='badge badge-warning' >กำลังดำเนินการ<span>";
+                }else if($data==3)
+                {
+                        echo "<span class='badge badge-info' >รออะไหล่<span>";
+                }else if($data==4)
+                {
+                        echo "<span class='badge badge-success' >ซ่อมสำเร็จ<span>";
+                }else if($data==5)
+                {
+                        echo "<span class='badge badge-warning' >ซ่อมไม่สำเร็จ<span>";
+                }else if($data==6)
+                {
+                        echo "<span class='badge badge-dark' >ยกเลิกการซ่อม<span>";
+                }else if($data==7)
+                {
+                        echo "<span class='badge badge-success' >ส่งมอบเรียบร้อย<span>";
+                }else if($data==8)
+                {
+                        echo "<span class='badge badge-danger' >ส่งต่อสำนักเทคฯ<span>";
+                }else if($data==9)
+                {
+                        echo "<span class='badge badge-primary' >ส่งหน่วยงานภายนอก<span>";
+                }else if($data==10)
+                {
+                        echo "<span class='badge badge-warning' >ซื้อใหม่ทดแทน<span>";
+                } 
+        }
+}
+
+
 
 /*--------------------
 

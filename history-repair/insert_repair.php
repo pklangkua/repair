@@ -1,6 +1,6 @@
 <?php
-echo $_POST['HardwareName'],"<br>",$_POST['HardwareID'],"<br>",$_POST['HardwareCode'],"<br>",$_POST['office'],"<br>",$_POST['officeID'],"<br>",$_POST['detail'],"<br>",$_POST['comment'],"<br>",$_POST['UserID'];
-
+//echo $_POST['HardwareName'],"<br>",$_POST['HardwareID'],"<br>",$_POST['HardwareCode'],"<br>",$_POST['office'],"<br>",$_POST['officeID'],"<br>",$_POST['detail'],"<br>",$_POST['comment'],"<br>",$_POST['UserID'];
+ob_start();
 require_once("../master/function.php");
 $conn = new connectDB;
 
@@ -11,12 +11,13 @@ if(isset($_POST['HardwareName']) && isset($_POST['HardwareID'])&& isset($_POST['
     $HardwareID = $_POST['HardwareID'];
     $HardwareCode = $_POST['HardwareCode'];
     $officeID = $_POST['officeID'];
-    $detail = $_POST['detail'];
+    $detail = $_POST['detail']; 
     $comment = $_POST['comment'];
     $UserID = $_POST['UserID'];
+    $UserOfficeID =$_SESSION['OfficeID'];
 
-    $sql = "INSERT INTO r_data_repair (HardwareID,HardwareCode,HardwareName,OfficeID,Detail,Comment,UserID)".
-    $sql = " VALUES ('$HardwareID','$HardwareCode','$HardwareName','$officeID','$detail','$comment','$UserID')";
+    $sql = "INSERT INTO r_data_repair (HardwareID,HardwareCode,HardwareName,OfficeID,Detail,Comment,UserID,UserOfficeID,DateRepair)".
+    $sql = " VALUES ('$HardwareID','$HardwareCode','$HardwareName','$officeID','$detail','$comment','$UserID','$UserOfficeID',NOW())";
     
     echo $sql;
     $conn->exe($sql); 

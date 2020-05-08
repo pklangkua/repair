@@ -13,7 +13,7 @@ $sSql2 = "SELECT * from r_status ";
 $arrData2 = $conn->return_sql($sSql2);
 $recCount2 = $conn->record_count($sSql2);
 
-$sSql3 = "SELECT * from r_office ";
+$sSql3 = "SELECT * from r_office WHERE OrganizationID='1' ";
 $arrData3 = $conn->return_sql($sSql3);
 $recCount3 = $conn->record_count($sSql3);
 

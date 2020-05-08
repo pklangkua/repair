@@ -44,7 +44,7 @@ if($st==1){
         $result = sqlsrv_query( $conn,$query);
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)){
             
-            $response[] = array("value2"=>$row['HardwareCode'],"label2"=>$row['HardwareName'],
+            $response[] = array("value"=>$row['HardwareCode'],"label"=>$row['HardwareName'],
                                 "office"=>$row['OfficeName'],"officeID"=>$row['OfficeID'],"HardwareID"=>$row['HardwareID']);
         }
         echo json_encode($response);
