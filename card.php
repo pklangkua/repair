@@ -1,10 +1,13 @@
 <?php
+ob_start();
 require_once("master/function.php");
 $status = new connectDB;
 $conn = new connectDB;
 $sSql = "SELECT * FROM r_user";
 $arrData = $conn->return_sql($sSql);
 $recCount = $conn->record_count($sSql);
+
+$SQL = "";
 ?>
 <div class="container-fluid">
     <div class="row">

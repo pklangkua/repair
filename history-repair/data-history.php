@@ -49,7 +49,7 @@ $recCount = $ConMysql->record_count($sSql);
              
             </th>
             <td><button type="button" class="btn btn-info "
-                    onclick="window.location.href = '?module=data-history-detail&&detailID=<?=$arrData[$sLoop][0]?>';">รายละเอียด</button></td>
+                    onclick="window.location.href = '?module=data-history-detail&&detailID=<?=$arrData[$sLoop][0]?>';" title="รายละเอียด"><i class="fas fa-database"></i> </button></td>
         </tr><?php } }?>
     </tbody>
     <tfoot>

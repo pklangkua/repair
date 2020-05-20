@@ -71,7 +71,7 @@ $recCount = $conn2->record_count($sSql);
 
 </form>
 
-<form method="post" action="index.php" name="frmRepair">
+<form method="post" action="" name="frmRepair">
 
     <div id="DurableRepair" class="modal modal-child fade  bd-example-modal-lg" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
@@ -94,6 +94,29 @@ $recCount = $conn2->record_count($sSql);
 
 </form>
 
+<!-- <form method="post" action="index.php" name="frmRepair">
+
+    <div id="DurableDetail" class="modal modal-child fade  bd-example-modal-lg" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">แจ้งซ่อม </h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Save">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form> -->
+
 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
     <thead>
         <tr>
@@ -108,7 +131,7 @@ $recCount = $conn2->record_count($sSql);
     <tbody>
         <?php while ($result = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)){  ?>
         <tr>
-            <td><?=$i?></td>
+            <td><?=$i?><input type="checkbox" name="name[<?=$i?>]"></td>
             <td><?=$result['HardwareCode']?></td>
             <td><?=$result['HardwareName']?></td>
             <td><?=$result['HardwareTypeGroupName']?></td>
@@ -118,7 +141,7 @@ $recCount = $conn2->record_count($sSql);
                 <button type="button" class="btn btn-info btn-sm view_data" id='1' data-target="#DurableDetail"
                     data-toggle="modal"><i class="fas fa-edit"></i> รายละเอียด</button>
                 <button type="button" class="btn btn-danger btn-sm repair" data-target="#DurableRepair"
-                    data-toggle="modal"><i class="fas fa-edit"></i> แจ้งซ่อม</button>
+                    data-toggle="modal" id2="2"><i class="fas fa-edit"></i> แจ้งซ่อม</button>
             </td>
         </tr>
         <?php $i++; }?>
@@ -156,14 +179,14 @@ $(document).ready(function() {
                 $('.modal-body').html(response);
 
                 // Display Modal
-                $('#empModal').modal('show');
+                $('#DurableDetail').modal('show');
             }
         });
     });
 
     $('.repair').click(function() {
 
-        var userid = $(this).attr('id');
+        var userid = $(this).attr('id2');
 
         // AJAX request
         $.ajax({
@@ -177,7 +200,7 @@ $(document).ready(function() {
                 $('.modal-body').html(response);
 
                 // Display Modal
-                $('#empModal').modal('show');
+                $('#DurableRepair').modal('show');
             }
         });
     });
