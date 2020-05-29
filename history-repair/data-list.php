@@ -9,7 +9,19 @@ $ConMysql = new connectDB ;
 $cat = new category;
 
 
-$sSql = "SELECT * FROM r_data_repair WHERE UserOfficeID ='$UserOfficeID' AND CategoryID <>7";
+$sSql = "SELECT r.ID,
+r.HardwareID,
+r.HardwareCode,
+r.HardwareName,
+r.OfficeID,
+r.Detail,
+r.`Comment`,
+r.UserID,
+r.UserOfficeID,
+r.CategoryID,
+r.DateRepair,
+u.fullname FROM r_data_repair r inner join r_user u  on u.username = r.UserID
+WHERE r.UserOfficeID ='$UserOfficeID' AND r.CategoryID <>7";
 $arrData = $ConMysql->return_sql($sSql);
 $recCount = $ConMysql->record_count($sSql);
 
@@ -79,7 +91,9 @@ $recCount = $ConMysql->record_count($sSql);
             <th>อาการ/สาเหตุ</th>
             <th>วันที่แจ้งซ่อม</th>
             <th>สถานะ</th>
+            <th>ผู้แจ้ง</th>
             <th>รายละเอียด</th>
+            
         </tr>
     </thead>
     <tbody>
@@ -100,6 +114,7 @@ $recCount = $ConMysql->record_count($sSql);
             ?>
 
             </th>
+            <td><?=$arrData[$sLoop][11]?></td>
             <td>
                 <button type="button" class="btn btn-info "
                     onclick="window.location.href = '?module=data-history-detail&&detailID=<?=$arrData[$sLoop][0]?>';"
@@ -110,6 +125,7 @@ $recCount = $ConMysql->record_count($sSql);
                     data-target="#myModal" id="<?=$arrData[$sLoop][0]?>" fname="<?=$arrData[$sLoop][3]?>"><i
                         class="fas fa-desktop"></i></button>
             </td>
+            
         </tr><?php  } }?>
     </tbody>
     <tfoot>
@@ -120,7 +136,9 @@ $recCount = $ConMysql->record_count($sSql);
             <th>อาการ/สาเหตุ</th>
             <th>วันที่แจ้งซ่อม</th>
             <th>สถานะ</th>
+            <th>ผู้แจ้ง</th>
             <th>รายละเอียด</th>
+            
         </tr>
     </tfoot>
 </table>

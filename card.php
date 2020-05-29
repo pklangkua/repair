@@ -69,19 +69,7 @@ if($status =='3')
 
         </div>
         <div class="col">
-            <div class="card text-center  ">
-                <div class="card-header bg-info">
-                    <h4>สมาชิก</h4>
-                </div>
-                <div class="card-body bg-light">
-                    <h5 class="card-title ">สมาชิก ทั้งหมด</h5>
-                    <p class="card-text">จำนวน <?=$recCount?> คน</p>
-
-                </div>
-                <div class="card-footer ">
-                    <a href="index.php?module=member" class="btn btn-info">รายละเอียด</a>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>
