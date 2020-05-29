@@ -1,3 +1,30 @@
+<?php
+ob_start();
+include_once("master/function.php");
+include_once("master/function_mssql.php");
+$idrepair = $_REQUEST["detailID"];
+$user = $_SESSION['user'];
+$UserOfficeID =$_SESSION['OfficeID'];
+$ConMysql = new connectDB ;
+$cat = new category;
+
+
+$sSql = "SELECT
+r_repair_status.id,
+r_repair_status.repair_id,
+r_repair_status.CategoryID,
+r_repair_status.`comment`,
+r_repair_status.create_date,
+r_data_repair.DateRepair,
+r_user.fullname
+FROM
+r_repair_status
+INNER JOIN r_data_repair ON r_data_repair.ID = r_repair_status.repair_id
+INNER JOIN r_user ON r_user.username = r_data_repair.UserID WHERE repair_id='$idrepair'";
+$arrData = $ConMysql->return_sql($sSql);
+$recCount = $ConMysql->record_count($sSql);
+?>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
@@ -18,22 +45,25 @@
                         <tr>
                             <th>พัสดุ</th>
                             <th>วันที่แจ้งซ่อม</th>
-                            <th>วันที่รับซ่อม</th>
-                            <th>ผู้ปฎิบัติงาน</th>
-                            <th>สถานะการซ่อม</th>
+                            <th>วันที่บันทึกการซ่อม</th>
                             <th>รายละเอียด</th>
+                            <th>สถานะการซ่อม</th>
+                            <th>ผู้ปฎิบัติงาน</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <?php   if($recCount>0){
+	                        for ($sLoop=0;$sLoop<$recCount;$sLoop++){
+	                ?>
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td><button type="submit" class="btn btn-danger "
-                                    onclick="return confirm('Are you sure you want to delete?')">ลบ</button></td>
+                            <td><?=$sLoop+1?></td>
+                            <td><?=$arrData[$sLoop][5]?></td>
+                            <td><?=$arrData[$sLoop][4]?></td>
+                            <td><?=$arrData[$sLoop][3]?></td>
+                            <td><?php  $cat->cat_chk($arrData[$sLoop][2]); ?></td>
+                            <td><?=$arrData[$sLoop][6]?></td>
                         </tr>
+                        <?php } }?>
                     </tbody>
                     <tfoot>
                         <tr>

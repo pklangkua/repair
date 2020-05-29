@@ -42,7 +42,6 @@ $recCount3 = $conn->record_count($sSql3);
                                                 {
                                                     for ($sLoop=0;$sLoop<$recCount2;$sLoop++)
                                                 {
-                                                //print $arrData[$sLoop][0] . "-" .  $arrData[$sLoop][1] . "";
                                             ?>
                             <option value="<?=$arrData2[$sLoop][0]?>"><?=$arrData2[$sLoop][1]?></option>
                             <?php }}?>
