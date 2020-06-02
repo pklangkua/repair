@@ -28,7 +28,7 @@ if(!isset($_SESSION['user'])) {
 			header("Location: ../index.php?module=");
 		}else 
 		{
-			$sSql = "INSERT r_user (id,username,fullname,create_date,lastvisit_login,department) VALUES ('','$username','$fullname',NOW(),NOW(),'$department' )";
+			$sSql = "INSERT r_user (id,username,fullname,create_date,lastvisit_login,department) VALUES (null,'$username','$fullname',NOW(),NOW(),'$department' )";
 			$conn->exe($sSql);
 		
 			header("Location: ../index.php?module=");

@@ -8,7 +8,6 @@ $UserOfficeID =$_SESSION['OfficeID'];
 $ConMysql = new connectDB ;
 $cat = new category;
 
-
 $sSql = "SELECT r.ID,
 r.HardwareID,
 r.HardwareCode,
@@ -46,7 +45,7 @@ $recCount = $ConMysql->record_count($sSql);
                 <div class="modal-body">
 
                     <div class="form-group">
-                    <label >สถานะ</label>
+                        <label>สถานะ</label>
                         <select class="form-control" name="sellist1">
                             <option>------------------ เลือก ------------------</option>
                             <?php  
@@ -63,14 +62,14 @@ $recCount = $ConMysql->record_count($sSql);
                             <?php }}?>
                         </select></div>
                     <div class="form-group">
-                    <label >รายละเอียด</label>
+                        <label>รายละเอียด</label>
                         <textarea class="form-control" name="detail" id="" cols="50" rows="5"></textarea>
                     </div>
 
                 </div>
                 <div class="modal-footer">
 
-                    <input type="hidden" name="id" id="id" />
+                    <input type="text" name="id" id="id" />
                     <input type="submit" class="btn btn-primary" value="Save">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
@@ -85,15 +84,14 @@ $recCount = $ConMysql->record_count($sSql);
 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
     <thead>
         <tr>
-            <th>ลำดับ</th>
+        <th>ลำดับ</th>
             <th>รายการ</th>
             <th>เลขครุภัณฑ์</th>
             <th>อาการ/สาเหตุ</th>
             <th>วันที่แจ้งซ่อม</th>
             <th>สถานะ</th>
-            <th>ผู้แจ้ง</th>
             <th>รายละเอียด</th>
-            
+            <th>ผู้แจ้ง</th>
         </tr>
     </thead>
     <tbody>
@@ -114,7 +112,6 @@ $recCount = $ConMysql->record_count($sSql);
             ?>
 
             </th>
-            <td><?=$arrData[$sLoop][11]?></td>
             <td>
                 <button type="button" class="btn btn-info "
                     onclick="window.location.href = '?module=data-history-detail&&detailID=<?=$arrData[$sLoop][0]?>';"
@@ -125,7 +122,9 @@ $recCount = $ConMysql->record_count($sSql);
                     data-target="#myModal" id="<?=$arrData[$sLoop][0]?>" fname="<?=$arrData[$sLoop][3]?>"><i
                         class="fas fa-desktop"></i></button>
             </td>
-            
+            <td><?=$arrData[$sLoop][11]?></td>
+
+
         </tr><?php  } }?>
     </tbody>
     <tfoot>
@@ -136,9 +135,9 @@ $recCount = $ConMysql->record_count($sSql);
             <th>อาการ/สาเหตุ</th>
             <th>วันที่แจ้งซ่อม</th>
             <th>สถานะ</th>
-            <th>ผู้แจ้ง</th>
             <th>รายละเอียด</th>
-            
+            <th>ผู้แจ้ง</th>
+
         </tr>
     </tfoot>
 </table>
@@ -149,9 +148,9 @@ $(document).ready(function() {
 
     $('.edit').on('click', function() {
         var uid = $(this).attr("id");
-        var fname = $(this).attr("fname");
+        //var fname = $(this).attr("fname");
         $('#id').val(uid);
-        $('#name').val(fname);
+        //$('#name').val(fname);
         document.getElementById("showText").innerHTML = $(this).attr("fname"); //"HELLO";
     });
 });

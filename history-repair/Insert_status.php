@@ -7,7 +7,7 @@ ob_start();
   $IDrepair = $_POST["id"];
   
     $conn = new connectDB;
-    $sSql = "INSERT INTO r_repair_status VALUES('','$IDrepair','','$sel','$detail','$user',NOW(),'');";
+    $sSql = "INSERT INTO r_repair_status VALUES(null,'$IDrepair','0','$sel','$detail','$user',NOW(),'0.00');";
     $conn->exe($sSql);
 
     $conn2 = new connectDB;

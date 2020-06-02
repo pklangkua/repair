@@ -10,6 +10,7 @@ $OfficeID = $status->OfficeID();
 $st = $status->status();
 $_SESSION['status'] = $st;
 $_SESSION['OfficeID'] = $OfficeID;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
