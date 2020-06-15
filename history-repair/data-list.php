@@ -25,13 +25,13 @@ $arrData = $ConMysql->return_sql($sSql);
 $recCount = $ConMysql->record_count($sSql);
 
 ?>
-
+ <!--
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> -->
 
 <form method="post" action="/repair/history-repair/Insert_status.php" name="frmInsertStatus">
     <div id="myModal" class="modal modal-child fade addNewRequestModal" tabindex="-1" role="dialog"
@@ -69,7 +69,7 @@ $recCount = $ConMysql->record_count($sSql);
                 </div>
                 <div class="modal-footer">
 
-                    <input type="text" name="id" id="id" />
+                    <input type="hidden" name="id" id="id" />
                     <input type="submit" class="btn btn-primary" value="Save">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
@@ -112,6 +112,7 @@ $recCount = $ConMysql->record_count($sSql);
             ?>
 
             </th>
+            <td><?=$arrData[$sLoop][11]?></td>
             <td>
                 <button type="button" class="btn btn-info "
                     onclick="window.location.href = '?module=data-history-detail&&detailID=<?=$arrData[$sLoop][0]?>';"
@@ -122,7 +123,7 @@ $recCount = $ConMysql->record_count($sSql);
                     data-target="#myModal" id="<?=$arrData[$sLoop][0]?>" fname="<?=$arrData[$sLoop][3]?>"><i
                         class="fas fa-desktop"></i></button>
             </td>
-            <td><?=$arrData[$sLoop][11]?></td>
+            
 
 
         </tr><?php  } }?>
@@ -146,7 +147,8 @@ $recCount = $ConMysql->record_count($sSql);
 $(document).ready(function() {
     $('#example').DataTable();
 
-    $('.edit').on('click', function() {
+   // $('.edit').on('click', function() {
+        $("body").on("click", ".edit", function(event){ 
         var uid = $(this).attr("id");
         //var fname = $(this).attr("fname");
         $('#id').val(uid);
@@ -155,9 +157,9 @@ $(document).ready(function() {
     });
 });
 </script>
-
+<!--
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> -->

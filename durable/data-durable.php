@@ -42,6 +42,7 @@ $recCount = $conn2->record_count($sSql);
         $i=1;
     }
 ?>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
@@ -78,7 +79,7 @@ $recCount = $conn2->record_count($sSql);
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">แจ้งซ่อม </h4>
+                    <h4 class="modal-title" id="DurableRepair">แจ้งซ่อม </h4>
                 </div>
                 <div class="modal-body">
 
@@ -94,30 +95,7 @@ $recCount = $conn2->record_count($sSql);
 
 </form>
 
-<!-- <form method="post" action="index.php" name="frmRepair">
-
-    <div id="DurableDetail" class="modal modal-child fade  bd-example-modal-lg" tabindex="-1" role="dialog"
-        aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">แจ้งซ่อม </h4>
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary" value="Save">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</form> -->
-
-<table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+<table id="durable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
     <thead>
         <tr>
             <th>ลำดับ</th>
@@ -138,7 +116,7 @@ $recCount = $conn2->record_count($sSql);
             <td><?=$result['OfficeName']?></td>
             <td>
 
-                <button type="button" class="btn btn-info btn-sm view_data" id='1' data-target="#DurableDetail"
+                <button type="button" class="btn btn-info btn-sm view_data" id='<?=$i?>' data-target="#DurableDetail"
                     data-toggle="modal"><i class="fas fa-edit"></i> รายละเอียด</button>
                 <button type="button" class="btn btn-danger btn-sm repair" data-target="#DurableRepair"
                     data-toggle="modal" id2="2"><i class="fas fa-edit"></i> แจ้งซ่อม</button>
@@ -161,10 +139,10 @@ $recCount = $conn2->record_count($sSql);
                         class="fas fa-edit" data-target="#empModal" data-toggle="modal"></i> รายละเอียด</button>  -->
 <script>
 $(document).ready(function() {
-    $('#example').DataTable();
+    $('#durable').DataTable();
 
-    $('.view_data').click(function() {
-
+    //$('.view_data').click(function() {
+        $("body").on("click", ".view_data", function(event){ 
         var userid = $(this).attr('id');
 
         // AJAX request
@@ -184,8 +162,8 @@ $(document).ready(function() {
         });
     });
 
-    $('.repair').click(function() {
-
+    //$('.repair').click(function() {
+        $("body").on("click", ".repair", function(event){ 
         var userid = $(this).attr('id2');
 
         // AJAX request
@@ -209,8 +187,6 @@ $(document).ready(function() {
 });
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
