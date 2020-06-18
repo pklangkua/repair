@@ -106,7 +106,7 @@ $(document).ready(function() {
                                 </div>
                                 <div class="form-group">
                                     <br>
-                                    <label for="comment">กอง/สำนัก</label>
+                                    <label for="comment">หน่วยงาน</label>
                                     <input type="text" class="form-control" name="office" id="office"
                                         placeholder="หน่วยงาน">
                                     <input type="hidden" class="form-control" name="HardwareID" id="HardwareID">

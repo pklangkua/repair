@@ -1,5 +1,6 @@
 <?php
-//echo $_POST['HardwareName'],"<br>",$_POST['HardwareID'],"<br>",$_POST['HardwareCode'],"<br>",$_POST['office'],"<br>",$_POST['officeID'],"<br>",$_POST['detail'],"<br>",$_POST['comment'],"<br>",$_POST['UserID'];
+//echo $_POST['HardwareName'],"<br>",$_POST['HardwareID'],"<br>",$_POST['HardwareCode'],"<br>",$_POST['office'],"<br>",$_POST['officeID'],
+//"<br>",$_POST['detail'],"<br>",$_POST['comment'],"<br>",$_POST['UserID'];
 ob_start();
 require_once("../master/function.php");
 $conn = new connectDB;
@@ -23,4 +24,4 @@ if(isset($_POST['HardwareName']) && isset($_POST['HardwareID'])&& isset($_POST['
     $conn->exe($sql); 
         header("Location:/repair/index.php?module=history-repair");
 }
- 
+ ?>

@@ -72,7 +72,7 @@ $recCount = $conn2->record_count($sSql);
 
 </form>
 
-<form method="post" action="" name="frmRepair">
+<form method="post" action="history-repair/insert_repair.php" name="frmRepair">
 
     <div id="DurableRepair" class="modal modal-child fade  bd-example-modal-lg" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
@@ -119,7 +119,14 @@ $recCount = $conn2->record_count($sSql);
                 <button type="button" class="btn btn-info btn-sm view_data" id='<?=$i?>' data-target="#DurableDetail"
                     data-toggle="modal"><i class="fas fa-edit"></i> รายละเอียด</button>
                 <button type="button" class="btn btn-danger btn-sm repair" data-target="#DurableRepair"
-                    data-toggle="modal" id2="2"><i class="fas fa-edit"></i> แจ้งซ่อม</button>
+                    data-toggle="modal" 
+                    id2=<?=$user?>
+                    hname='<?=$result['HardwareName']?>' 
+                    OfficeID='<?=$result['OfficeID']?>' 
+                    HardwareCode='<?=$result['HardwareCode']?>'
+                    Officename='<?=$result['OfficeName']?>'
+                    HardwareID='<?=$result['HardwareID']?>'> 
+                    <i class="fas fa-edit"></i> แจ้งซ่อม</button>
             </td>
         </tr>
         <?php $i++; }?>
@@ -142,7 +149,7 @@ $(document).ready(function() {
     $('#durable').DataTable();
 
     //$('.view_data').click(function() {
-        $("body").on("click", ".view_data", function(event){ 
+    $("body").on("click", ".view_data", function(event) {
         var userid = $(this).attr('id');
 
         // AJAX request
@@ -163,15 +170,25 @@ $(document).ready(function() {
     });
 
     //$('.repair').click(function() {
-        $("body").on("click", ".repair", function(event){ 
+    $("body").on("click", ".repair", function(event) {
         var userid = $(this).attr('id2');
+        var hname = $(this).attr('hname');
+        var Officename = $(this).attr('Officename');
+        var HardwareCode = $(this).attr('HardwareCode');
+        var OfficeID = $(this).attr('OfficeID');
+        var HardwareID = $(this).attr('HardwareID');
 
         // AJAX request
         $.ajax({
             url: 'durable/ajaxfileRepair.php',
             type: 'post',
             data: {
-                userid: userid
+                userid: userid,
+                hname: hname,
+                Officename: Officename,
+                HardwareCode: HardwareCode,
+                OfficeID: OfficeID,
+                HardwareID:HardwareID
             },
             success: function(response) {
                 // Add response in Modal body
