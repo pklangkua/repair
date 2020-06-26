@@ -1,10 +1,65 @@
-<form >
+<?php 
+ob_start();
+$id = $_POST['userid'];
+
+include_once("../master/function.php");
+include_once("../master/function_mssql.php");
+
+$user = $_SESSION['user'];
+$UserOfficeID =$_SESSION['OfficeID'];
+$ConMysql = new connectDB ;
+$cat = new category;
+
+$stmt = "SELECT h.*,ht.HardwareTypeName,htg.HardwareTypeGroupName,
+dbo.Office.OfficeName
+FROM
+dbo.Hardware AS h
+INNER JOIN dbo.HardwareType AS ht ON ht.HardwareTypeID = h.HardwareTypeID
+INNER JOIN HardwareTypeGroup AS htg ON htg.HardwareTypeGroupID = ht.HardwareTypeGroupID 
+INNER JOIN dbo.Office ON dbo.Office.OfficeID = h.OfficeID
+WHERE h.HardwareID='$id' ";
+//echo $stmt;
+$query = sqlsrv_query( $conn, $stmt);
+while ($result = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)){
+?>
+<div class="card-body">
     <div class="row">
-      <div class="col">
-      <input type="text" class="form-control " id="email" placeholder="Enter email" name="email" >
-      </div>
-      <div class="col">
-        <input type="password" class="form-control" placeholder="Enter password" name="pswd">
-      </div>
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                <strong>ชื่อครุภัณฑ์:</strong> <?=$result['HardwareName']?>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="far fa-id-card mr-sm-2"> </i><strong>รหัสทะเบียนครุภัณฑ์:</strong> <?=$result['HardwareCode']?></li>
+                    <li class="list-group-item"><i class="fas fa-book mr-sm-2"></i><strong>ประเภทครุภัณฑ์:</strong> <?=$result['HardwareTypeGroupName']?></li>
+                    <li class="list-group-item"><i class="fas fa-info mr-sm-2"></i><strong>หน่วยงานรับผิดชอบ:</strong> <?=$result['OfficeName']?></li>
+                    <li class="list-group-item"><i class="fas fa-eye-dropper mr-sm-2"></i><strong>คุณลักษณะ/ชื่อ:</strong> <?=$result['HardwareCode']?></li>
+                    <li class="list-group-item"><i class="fas fa-location-arrow mr-sm-2"></i><strong>สถานที่ติดตั้ง:</strong> <?=$result['InstallationLocation']?></li>
+                    <li class="list-group-item"><i class="fas fa-calendar-alt mr-sm-2"></i><strong>วันที่ได้รับ:</strong> <?=$result['HardwareCode']?></li>
+                    <li class="list-group-item"><i class="far fa-images mr-sm-2"></i><strong>จำนวนชุด:</strong> <?=$result['HardwareCode']?></li>
+                    <li class="list-group-item"><i class="fas fa-bullhorn mr-sm-2"></i><strong>ราคา:</strong> <?=$result['PriceSetMoney']?></li>
+                    <li class="list-group-item"><i class="fas fa-bullseye mr-sm-2"></i><strong>ผู้จัดจำหน่าย:</strong> <?=$result['HardwareCode']?></li>
+                </ul>
+            </div>
+<?php }?>
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    ประวัติการซ่อม </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="far fa-file-alt mr-sm-2"></i>พัสดุ:
+                        </li>
+                    <li class="list-group-item"><i class="fa fa-align-center mr-sm-2"></i>หมายเลขเครื่อง/เลขทะเบียน:
+                        </li>
+                    <li class="list-group-item"><i class="fas fa-calendar-alt mr-sm-2"></i>วันที่แจ้งซ่อม:
+                        </li>
+                    <li class="list-group-item"><i class="far fa-comment-alt mr-sm-2"></i>หมายเหตุการซ่อม:
+                        </li>
+                    <li class="list-group-item"><i class="fas fa-eye mr-sm-2"></i>รายละเอียดการซ่อม/ปัญหา:
+                        </li>
+                </ul>
+            </div>
+
+        </div>
     </div>
-  </form>
+</div>

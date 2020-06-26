@@ -116,7 +116,7 @@ $recCount = $conn2->record_count($sSql);
             <td><?=$result['OfficeName']?></td>
             <td>
 
-                <button type="button" class="btn btn-info btn-sm view_data" id='<?=$i?>' data-target="#DurableDetail"
+                <button type="button" class="btn btn-info btn-sm view_data" id='<?=$result['HardwareID']?>' data-target="#DurableDetail"
                     data-toggle="modal"><i class="fas fa-edit"></i> รายละเอียด</button>
                 <button type="button" class="btn btn-danger btn-sm repair" data-target="#DurableRepair"
                     data-toggle="modal" 

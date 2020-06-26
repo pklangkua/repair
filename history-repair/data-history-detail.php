@@ -40,7 +40,8 @@ if($recCount>0){
                         รายละเอียดของ ผู้แจ้งซ่อม
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><i class="far fa-id-card mr-sm-2"> </i>ชื่อ นามสกุล: <?=$fullname?></li>
+                        <li class="list-group-item"><i class="far fa-id-card mr-sm-2"> </i>ชื่อ นามสกุล: <?=$fullname?>
+                        </li>
                         <li class="list-group-item"><i class="fas fa-phone-volume mr-sm-2"></i>โทรศัพท์: <?=$tel?></li>
                     </ul>
                 </div>
@@ -48,26 +49,30 @@ if($recCount>0){
                 <div class="card">
                     <div class="card-header">
                         รายละเอียดการซ่อม </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><i class="far fa-file-alt mr-sm-2"></i>พัสดุ: <?=$arrData[$sLoop][3]?></li>
-                                <li class="list-group-item"><i
-                                        class="fa fa-align-center mr-sm-2"></i>หมายเลขเครื่อง/เลขทะเบียน: <?=$arrData[$sLoop][2]?></li>
-                                <li class="list-group-item"><i class="fas fa-calendar-alt mr-sm-2"></i>วันที่แจ้งซ่อม: <?=$arrData[$sLoop][10]?>
-                                </li>
-                                <li class="list-group-item"><i class="far fa-comment-alt mr-sm-2"></i>หมายเหตุการซ่อม: <?=$arrData[$sLoop][5]?>
-                                </li>
-                                <li class="list-group-item"><i class="fas fa-eye mr-sm-2"></i>รายละเอียดการซ่อม/ปัญหา: <?=$arrData[$sLoop][6]?>
-                                </li>
-                            </ul>
-                    </div>
-<br>
-                    <?php include("history.php")?>
-                    <div class="col-sm-2">
-                    </div>
-
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="far fa-file-alt mr-sm-2"></i>พัสดุ:
+                            <?=$arrData[$sLoop][3]?></li>
+                        <li class="list-group-item"><i class="fa fa-align-center mr-sm-2"></i>หมายเลขเครื่อง/เลขทะเบียน:
+                            <?=$arrData[$sLoop][2]?></li>
+                        <li class="list-group-item"><i class="fas fa-calendar-alt mr-sm-2"></i>วันที่แจ้งซ่อม:
+                            <?=$arrData[$sLoop][10]?>
+                        </li>
+                        <li class="list-group-item"><i class="far fa-comment-alt mr-sm-2"></i>หมายเหตุการซ่อม:
+                            <?=$arrData[$sLoop][5]?>
+                        </li>
+                        <li class="list-group-item"><i class="fas fa-eye mr-sm-2"></i>รายละเอียดการซ่อม/ปัญหา:
+                            <?=$arrData[$sLoop][6]?>
+                        </li>
+                    </ul>
                 </div>
+                <br>
+                <?php include("history.php")?>
+                <div class="col-sm-2">
+                </div>
+
             </div>
         </div>
     </div>
+</div>
 
-    <?php } } ?>
+<?php } } ?>
