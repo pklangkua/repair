@@ -1,7 +1,7 @@
 <?php
 ob_start();
-include_once("master/function.php");
-include_once("master/function_mssql.php");
+//include_once("master/function.php");
+//include_once("master/function_mssql.php");
 
 $user = $_SESSION['user'];
 $ID =$_GET['detailID'];

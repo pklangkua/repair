@@ -33,6 +33,29 @@ $recCount = $ConMysql->record_count($sSql);
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> 
 
+
+<form method="post" action="" name="">
+
+    <div id="repairDetail" class="modal modal-child fade  bd-example-modal-lg" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">รายละเอียด ครุภัณฑ์ </h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
 <form method="post" action="/repair/history-repair/Insert_status.php" name="frmInsertStatus">
     <div id="myModal" class="modal modal-child fade addNewRequestModal" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
@@ -114,6 +137,7 @@ $recCount = $ConMysql->record_count($sSql);
             </th>
             <td><?=$arrData[$sLoop][11]?></td>
             <td>
+
                 <button type="button" class="btn btn-info "
                     onclick="window.location.href = '?module=data-history-detail&&detailID=<?=$arrData[$sLoop][0]?>';"
                     title="รายละเอียด">
@@ -146,6 +170,26 @@ $recCount = $ConMysql->record_count($sSql);
 <script>
 $(document).ready(function() {
     $('#example').DataTable();
+
+    /* $("body").on("click", ".detail", function(event) {
+        var detailID = $(this).attr('id');
+
+        // AJAX request
+        $.ajax({
+            url: 'history-repair/data-history-detail2.php',
+            type: 'post',
+            data: {
+                detailID: detailID
+            },
+            success: function(response) {
+                // Add response in Modal body
+                $('.modal-body').html(response);
+
+                // Display Modal
+                $('#DurableDetail').modal('show');
+            }
+        });
+    }); */
 
    // $('.edit').on('click', function() {
         $("body").on("click", ".edit", function(event){ 
