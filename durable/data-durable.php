@@ -109,7 +109,7 @@ $recCount = $conn2->record_count($sSql);
     <tbody>
         <?php while ($result = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)){  ?>
         <tr>
-            <td><?=$i?><?=$result['HardwareID']?></td>
+            <td><?=$i?></td>
             <td><?=$result['HardwareCode']?></td>
             <td><?=$result['HardwareName']?></td>
             <td><?=$result['HardwareTypeGroupName']?></td>

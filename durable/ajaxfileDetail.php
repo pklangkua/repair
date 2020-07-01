@@ -64,7 +64,7 @@ while ($result = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)){
             <br>
             <div class="card">
                 <div class="card-header"> ประวัติการซ่อม </div>
-                <?php include_once("history.php")?>
+                <?php include_once("durable-detail.php")?>
                 <!--<ul class="list-group list-group-flush">
                     <li class="list-group-item"><i class="far fa-file-alt mr-sm-2"></i>พัสดุ:
                     </li>
