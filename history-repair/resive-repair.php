@@ -2,7 +2,7 @@
 ob_start();
 $UserID = $_SESSION['user'];
 require_once("master/function_mssql.php");
-
+$user = $_SESSION['user'];
 $query = "SELECT * FROM HardwareTypeGroup";
         $result = sqlsrv_query( $conn,$query);
 ?>

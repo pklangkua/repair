@@ -29,6 +29,10 @@ include ("master/head.php");
        {
         include ("test/autocomplete_test.php");
        }
+       else if($_GET["module"]=="recive")
+       {
+        include("recive-repair/recive-repair.php");
+       }
        else if($_GET["module"]=="error")
        {
         include ("error.php");

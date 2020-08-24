@@ -1,6 +1,7 @@
 <?php
 ob_start();
 require_once("function.php");
+$user = $_SESSION['user'];
 $chk = new checkLogin;
 $chk->chk_login();
 
@@ -36,6 +37,7 @@ $_SESSION['OfficeID'] = $OfficeID;
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  
     <title>DMH Repair</title>
 
 </head>
@@ -72,6 +74,7 @@ $_SESSION['OfficeID'] = $OfficeID;
                         <a class="dropdown-item" href="?module=resive-repair"   >แจ้งซ่อม</a>
                         <a class="dropdown-item" href="?module=history-repair">ติดตามการสั่งซ่อมของฉัน</a>
                         <a class="dropdown-item" href="?module=list-repair" <?php if($st==3){ echo 'style="display:none"';}?>>รายการแจ้งซ่อม</a>
+                        <a class="dropdown-item" href="?module=recive" <?php if($st==3){ echo 'style="display:none"';}?>>งานรับซ่อม</a>
                     </div>
                 </li>
                 <li class="nav-item">

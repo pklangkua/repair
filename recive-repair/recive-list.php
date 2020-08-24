@@ -5,6 +5,7 @@ include_once("master/function_mssql.php");
 
 $user = $_SESSION['user'];
 $UserOfficeID =$_SESSION['OfficeID'];
+echo $UserOfficeID;
 $ConMysql = new connectDB ;
 $cat = new category;
 
@@ -20,7 +21,7 @@ r.UserOfficeID,
 r.CategoryID,
 r.DateRepair,
 u.fullname FROM r_data_repair r inner join r_user u  on u.username = r.UserID
-WHERE r.UserOfficeID ='$UserOfficeID' AND r.CategoryID =1";
+WHERE r.UserOfficeID ='$UserOfficeID' AND r.CategoryID not in(7,1) AND  u.username = '$user'";
 $arrData = $ConMysql->return_sql($sSql);
 $recCount = $ConMysql->record_count($sSql);
 
@@ -114,7 +115,7 @@ $recCount = $ConMysql->record_count($sSql);
             <th>วันที่แจ้งซ่อม</th>
             <th>สถานะ</th>
             <th>รายละเอียด</th>
-            <th>ดำเนินการ</th>
+            <th>ผู้แจ้ง</th>
         </tr>
     </thead>
     <tbody>
@@ -138,7 +139,7 @@ $recCount = $ConMysql->record_count($sSql);
             <td><?=$arrData[$sLoop][11]?></td>
             <td>
 
-                <button style="display:none" type="button" class="btn btn-info "
+                <button type="button" class="btn btn-info "
                     onclick="window.location.href = '?module=data-history-detail&&detailID=<?=$arrData[$sLoop][0]?>';"
                     title="รายละเอียด">
                     <!--i class="fas fa-database"--><i class="fas fa-edit"></i> </button>
@@ -161,7 +162,7 @@ $recCount = $ConMysql->record_count($sSql);
             <th>วันที่แจ้งซ่อม</th>
             <th>สถานะ</th>
             <th>รายละเอียด</th>
-            <th>ดำเนินการ</th>
+            <th>ผู้แจ้ง</th>
 
         </tr>
     </tfoot>
