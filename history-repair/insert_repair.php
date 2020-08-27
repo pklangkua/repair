@@ -23,10 +23,13 @@ if(isset($_POST['HardwareName']) && isset($_POST['HardwareID'])&& isset($_POST['
     $sql = "INSERT INTO r_data_repair (HardwareID,HardwareCode,HardwareName,OfficeID,Detail,Comment,UserID,UserOfficeID,DateRepair)".
     $sql = " VALUES ('$HardwareID','$HardwareCode','$HardwareName','$officeID','$detail','$comment','$UserID','$UserOfficeID',NOW())";
     
-    $conn->exe($sql);   
+    $conn->exe($sql); 
+    if($conn)
+    {  
     $message = 'แจ้งซ่อมคอมพิวเตอร์ '."\n".'ครุภัณฑ์ชื่อ : '.$HardwareName."\n".'เลขทะเบียน : '.$HardwareCode.
-                "\n".'หน่วยงาน : '.$office ."\n".'รายละเอียด : '.$detail ."\n".'ผู้แจ้งซ่อม : '.$fullname;
+                "\n".'ครุภัณฑ์หน่วยงาน : '.$office ."\n".'รายละเอียด : '.$detail ."\n".'ผู้แจ้งซ่อม : '.$fullname."\n".'สถานะ : แจ้งซ่อม';
     $sentLine->LineNotify($message);
+    }
         header("Location:/repair/index.php?module=history-repair");
 }
  ?>

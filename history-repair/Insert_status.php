@@ -11,7 +11,7 @@ ob_start();
     $conn->exe($sSql);
 
     $conn2 = new connectDB;
-    $sSql2 = "UPDATE r_data_repair SET CategoryID=$sel WHERE ID=$IDrepair;";
+    $sSql2 = "UPDATE r_data_repair SET CategoryID=$sel ,UserRecive ='$user' WHERE ID=$IDrepair;";
     $conn2->exe($sSql2);
 
     header("Location:/repair/index.php?module=list-repair");

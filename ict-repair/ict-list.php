@@ -10,18 +10,18 @@ $ConMysql = new connectDB ;
 $cat = new category;
 
 $sSql = "SELECT r.ID,
-r.HardwareID,
-r.HardwareCode,
-r.HardwareName,
-r.OfficeID,
-r.Detail,
-r.`Comment`,
-r.UserID,
-r.UserOfficeID,
-r.CategoryID,
-r.DateRepair,
-u.fullname FROM r_data_repair r inner join r_user u  on u.username = r.UserID
-WHERE r.UserOfficeID ='$UserOfficeID' AND r.CategoryID not in(7,1) AND  r.UserRecive = '$user'";
+            r.HardwareID,
+            r.HardwareCode,
+            r.HardwareName,
+            r.OfficeID,
+            r.Detail,
+            r.`Comment`,
+            r.UserID,
+            r.UserOfficeID,
+            r.CategoryID,
+            r.DateRepair,
+            u.fullname FROM r_data_repair r inner join r_user u  on u.username = r.UserID
+            WHERE r.UserOfficeID ='$UserOfficeID' AND r.CategoryID  in(8) ";
 $arrData = $ConMysql->return_sql($sSql);
 $recCount = $ConMysql->record_count($sSql);
 

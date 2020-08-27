@@ -32,6 +32,13 @@ include ("master/head.php");
        else if($_GET["module"]=="recive")
        {
         include("recive-repair/recive-repair.php");
+       }else if($_GET["module"]=="ict")
+       {
+        include("ict-repair/ict-repair.php");
+       }
+       else if($_GET["module"]=="profile")
+       {
+        include("profile/profile.php");
        }
        else if($_GET["module"]=="error")
        {

@@ -75,6 +75,7 @@ $_SESSION['OfficeID'] = $OfficeID;
                         <a class="dropdown-item" href="?module=history-repair">ติดตามการสั่งซ่อมของฉัน</a>
                         <a class="dropdown-item" href="?module=list-repair" <?php if($st==3){ echo 'style="display:none"';}?>>รายการแจ้งซ่อม</a>
                         <a class="dropdown-item" href="?module=recive" <?php if($st==3){ echo 'style="display:none"';}?>>งานรับซ่อม</a>
+                        <a class="dropdown-item" href="?module=ict" <?php if($OfficeID<>13 || $st==3){ echo 'style="display:none"';}?>>งานส่งต่อสำนักเทค</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -113,7 +114,7 @@ $_SESSION['OfficeID'] = $OfficeID;
                         <a class="dropdown-item" href="?module=">ออกจากระบบ</a>
                     </div>-->
                     <div class="dropdown-menu dropdown-menu-right"> 
-                        <a class="dropdown-item" href="?module=">โปรไฟล์</a>
+                        <a class="dropdown-item" href="?module=profile">โปรไฟล์</a>
                         <a class="dropdown-item" href="login/index.php?out=1">ออกจากระบบ</a>
                         <!--<button class="dropdown-item" type="button">Action</button>
                         <button class="dropdown-item" type="button">Another action</button>

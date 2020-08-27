@@ -47,7 +47,7 @@ if($status =='3')
 
                 </div>
                 <div class="card-footer  ">
-                    <a href="index.php?module=list-repair" class="btn btn-success">รายละเอียด</a>
+                    <a href="index.php?module=history-repair" class="btn btn-success">รายละเอียด</a>
                 </div>
             </div>
 
