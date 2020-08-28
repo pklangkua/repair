@@ -30,14 +30,18 @@ $_SESSION['OfficeID'] = $OfficeID;
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"> -->
 
     <!-- END Datatable-->
- 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-  
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+    <!--
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css"> -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
     <title>DMH Repair</title>
 
 </head>
@@ -64,64 +68,70 @@ $_SESSION['OfficeID'] = $OfficeID;
         <div class="collapse navbar-collapse " id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="?module=" >หน้าหลัก</a>
+                    <a class="nav-link" href="?module=">หน้าหลัก</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                         งานซ่อม
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="?module=resive-repair"   >แจ้งซ่อม</a>
+                        <a class="dropdown-item" href="?module=resive-repair">แจ้งซ่อม</a>
                         <a class="dropdown-item" href="?module=history-repair">ติดตามการสั่งซ่อมของฉัน</a>
-                        <a class="dropdown-item" href="?module=list-repair" <?php if($st==3){ echo 'style="display:none"';}?>>รายการแจ้งซ่อม</a>
-                        <a class="dropdown-item" href="?module=recive" <?php if($st==3){ echo 'style="display:none"';}?>>งานรับซ่อม</a>
-                        <a class="dropdown-item" href="?module=ict" <?php if($OfficeID<>13 || $st==3){ echo 'style="display:none"';}?>>งานส่งต่อสำนักเทค</a>
+                        <a class="dropdown-item" href="?module=list-repair"
+                            <?php if($st==3){ echo 'style="display:none"';}?>>รายการแจ้งซ่อม</a>
+                        <a class="dropdown-item" href="?module=recive"
+                            <?php if($st==3){ echo 'style="display:none"';}?>>งานรับซ่อม</a>
+                        <a class="dropdown-item" href="?module=ict"
+                            <?php if($OfficeID<>13 || $st==3){ echo 'style="display:none"';}?>>งานส่งต่อสำนักเทค</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?module=durable" >ครุภัณฑ์</a>  <!-- style="display:none" -->
+                    <a class="nav-link" href="?module=durable">ครุภัณฑ์</a> <!-- style="display:none" -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?module=test" style="display:none" >test</a>  <!-- style="display:none" -->
+                    <a class="nav-link" href="?module=test" style="display:none">test</a> <!-- style="display:none" -->
                 </li>
-                <li class="nav-item dropdown" <?php if($st==1){ echo 'style="display:true"';}else{ echo 'style="display:none"';}?>> <!-- style="display:none"-->
+                <li class="nav-item dropdown"
+                    <?php if($st==1){ echo 'style="display:true"';}else{ echo 'style="display:none"';}?>>
+                    <!-- style="display:none"-->
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                         สมาชิก
                     </a>
-                    <div class="dropdown-menu"> 
+                    <div class="dropdown-menu">
                         <a class="dropdown-item" href="?module=member">รายชื่อสมาชิก</a>
                         <!--<a class="dropdown-item" href="#">Link 2</a> 
-                        <a class="dropdown-item" href="#">Link 3</a>--> 
+                        <a class="dropdown-item" href="#">Link 3</a>-->
                     </div>
                 </li>
-                
+
             </ul>
-            
+
         </div>
-        <form >
-        <div class="collapse navbar-collapse pull-left " id="collapsibleNavbar"  > 
-            <ul class="navbar-nav mr-auto ">
-                <li class="nav-item">
-                    <a class="nav-link" href="#" title="" style="color: #FFFFFF;">ยินดีต้อนรับ: <?=$_SESSION['fullname'][0]?></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </a>
-                    <!--<div class="dropdown-menu dropdown-menu-left">
+        <form>
+            <div class="collapse navbar-collapse pull-left " id="collapsibleNavbar">
+                <ul class="navbar-nav mr-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="" style="color: #FFFFFF;">ยินดีต้อนรับ:
+                            <?=$_SESSION['fullname'][0]?></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </a>
+                        <!--<div class="dropdown-menu dropdown-menu-left">
                         <a class="dropdown-item" href="?module=">เข้าสู่ระบบ</a>
                         <a class="dropdown-item" href="?module=">โปรไฟล์</a>
                         <a class="dropdown-item" href="?module=">ออกจากระบบ</a>
                     </div>-->
-                    <div class="dropdown-menu dropdown-menu-right"> 
-                        <a class="dropdown-item" href="?module=profile">โปรไฟล์</a>
-                        <a class="dropdown-item" href="login/index.php?out=1">ออกจากระบบ</a>
-                        <!--<button class="dropdown-item" type="button">Action</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="?module=profile">โปรไฟล์</a>
+                            <a class="dropdown-item" href="login/index.php?out=1">ออกจากระบบ</a>
+                            <!--<button class="dropdown-item" type="button">Action</button>
                         <button class="dropdown-item" type="button">Another action</button>
                         <button class="dropdown-item" type="button">Something else here</button>-->
-                    </div>
-                </li>
-            </ul>
-        </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </form>
     </nav>

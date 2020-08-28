@@ -10,32 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-04-30 15:34:52
+Date: 2020-08-28 15:09:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for customer
--- ----------------------------
-DROP TABLE IF EXISTS `customer`;
-CREATE TABLE `customer` (
-  `CustomerID` varchar(4) NOT NULL,
-  `Name` varchar(50) NOT NULL,
-  `Email` varchar(50) NOT NULL,
-  `CountryCode` varchar(2) NOT NULL,
-  `Budget` double NOT NULL,
-  `Used` double NOT NULL,
-  PRIMARY KEY (`CustomerID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of customer
--- ----------------------------
-INSERT INTO `customer` VALUES ('C001', 'Win Weerachai', 'win.weerachai@thaicreate.com', 'TH', '1000000', '600000');
-INSERT INTO `customer` VALUES ('C002', 'John  Smith', 'john.smith@thaicreate.com', 'EN', '2000000', '800000');
-INSERT INTO `customer` VALUES ('C003', 'Jame Born', 'jame.born@thaicreate.com', 'US', '3000000', '600000');
-INSERT INTO `customer` VALUES ('C004', 'Chalee Angel', 'chalee.angel@thaicreate.com', 'US', '4000000', '100000');
 
 -- ----------------------------
 -- Table structure for r_category
@@ -51,7 +29,7 @@ CREATE TABLE `r_category` (
   PRIMARY KEY (`id`),
   KEY `type` (`type`),
   KEY `category_id` (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of r_category
@@ -63,16 +41,35 @@ INSERT INTO `r_category` VALUES ('4', 'repairstatus', '4', 'ซ่อมสำ�
 INSERT INTO `r_category` VALUES ('5', 'repairstatus', '5', 'ซ่อมไม่สำเร็จ', '#FF0000', '1');
 INSERT INTO `r_category` VALUES ('6', 'repairstatus', '6', 'ยกเลิกการซ่อม', '#FF6F00', '1');
 INSERT INTO `r_category` VALUES ('7', 'repairstatus', '7', 'ส่งมอบเรียบร้อย', '#000000', '1');
-INSERT INTO `r_category` VALUES ('8', 'model_id', '2', 'Asus', '', '1');
-INSERT INTO `r_category` VALUES ('9', 'type_id', '3', 'โปรเจ็คเตอร์', '', '1');
-INSERT INTO `r_category` VALUES ('10', 'type_id', '2', 'เครื่องพิมพ์', '', '1');
-INSERT INTO `r_category` VALUES ('11', 'model_id', '3', 'Cannon', '', '1');
-INSERT INTO `r_category` VALUES ('12', 'category_id', '1', 'เครื่องใช้ไฟฟ้า', '', '1');
-INSERT INTO `r_category` VALUES ('13', 'category_id', '2', 'วัสดุสำนักงาน', '', '1');
-INSERT INTO `r_category` VALUES ('14', 'model_id', '1', 'Apple', '', '1');
-INSERT INTO `r_category` VALUES ('15', 'type_id', '1', 'เครื่องคอมพิวเตอร์', '', '1');
-INSERT INTO `r_category` VALUES ('16', 'model_id', '4', 'ACER', '', '1');
-INSERT INTO `r_category` VALUES ('17', 'type_id', '4', 'จอมอนิเตอร์', '', '1');
+INSERT INTO `r_category` VALUES ('8', 'repairstatus', '8', 'ส่งต่อสำนักเทคฯ', '', '1');
+INSERT INTO `r_category` VALUES ('9', 'repairstatus', '9', 'ส่งหน่วยงานภายนอก', '', '1');
+INSERT INTO `r_category` VALUES ('10', 'repairstatus', '10', 'ซื้อใหม่ทดแทน', null, '1');
+
+-- ----------------------------
+-- Table structure for r_data_repair
+-- ----------------------------
+DROP TABLE IF EXISTS `r_data_repair`;
+CREATE TABLE `r_data_repair` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `HardwareID` int(11) NOT NULL,
+  `HardwareCode` varchar(250) DEFAULT '',
+  `HardwareName` varchar(250) DEFAULT NULL,
+  `OfficeID` int(11) DEFAULT NULL,
+  `Detail` varchar(250) DEFAULT NULL,
+  `Comment` varchar(250) DEFAULT NULL,
+  `UserID` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
+  `UserOfficeID` int(11) DEFAULT NULL,
+  `CategoryID` int(11) DEFAULT 1,
+  `DateRepair` datetime DEFAULT NULL,
+  `UserRecive` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of r_data_repair
+-- ----------------------------
+INSERT INTO `r_data_repair` VALUES ('51', '21', '-', 'เครื่องคอมพิวเตอร์โน้ตบุ๊ก สำหรับงานสำนักงาน', '5', 'test', 'tettt', 'pradit_k', '13', '7', '2020-08-26 11:14:03', 'pradit_k');
+INSERT INTO `r_data_repair` VALUES ('52', '157', 'B0804-54-7440-010-0123/1', 'External Harddisk ยี่ห้อ Buffalo', '13', 'test', '', 'pradit_k', '13', '1', '2020-08-28 08:51:29', null);
 
 -- ----------------------------
 -- Table structure for r_inventory
@@ -217,22 +214,29 @@ CREATE TABLE `r_repair_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `repair_id` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL,
-  `operator_id` int(11) NOT NULL,
+  `CategoryID` int(11) NOT NULL,
   `comment` varchar(1000) NOT NULL,
-  `member_id` int(11) NOT NULL,
+  `member_id` varchar(20) NOT NULL,
   `create_date` datetime NOT NULL,
   `cost` decimal(10,2) NOT NULL DEFAULT 0.00,
   PRIMARY KEY (`id`),
   KEY `repair_id` (`repair_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of r_repair_status
 -- ----------------------------
-INSERT INTO `r_repair_status` VALUES ('1', '1', '1', '0', 'ttt', '1', '2020-04-07 13:20:54', '0.00');
-INSERT INTO `r_repair_status` VALUES ('3', '1', '2', '1', '', '1', '2020-04-08 12:23:51', '0.00');
-INSERT INTO `r_repair_status` VALUES ('4', '1', '1', '3', '', '3', '2020-04-08 12:48:44', '0.00');
-INSERT INTO `r_repair_status` VALUES ('5', '1', '3', '3', '', '3', '2020-04-08 12:49:17', '0.00');
+INSERT INTO `r_repair_status` VALUES ('81', '51', '0', '7', 'ttttt', 'pradit_k', '2020-08-26 11:15:11', '0.00');
+INSERT INTO `r_repair_status` VALUES ('82', '51', '0', '8', 'tttttt', 'pradit_k', '2020-08-26 11:16:44', '0.00');
+INSERT INTO `r_repair_status` VALUES ('83', '51', '0', '8', 'tttttt', 'pradit_k', '2020-08-26 11:17:39', '0.00');
+INSERT INTO `r_repair_status` VALUES ('84', '51', '0', '8', 'tttttt', 'pradit_k', '2020-08-26 11:17:53', '0.00');
+INSERT INTO `r_repair_status` VALUES ('85', '51', '0', '8', 'tttttt', 'pradit_k', '2020-08-26 11:18:41', '0.00');
+INSERT INTO `r_repair_status` VALUES ('86', '51', '0', '8', 'uuiuiui', 'pradit_k', '2020-08-26 11:18:52', '0.00');
+INSERT INTO `r_repair_status` VALUES ('87', '51', '0', '8', 'uyuyuyuy', 'pradit_k', '2020-08-26 11:19:07', '0.00');
+INSERT INTO `r_repair_status` VALUES ('88', '51', '0', '2', '', 'pradit_k', '2020-08-26 11:19:38', '0.00');
+INSERT INTO `r_repair_status` VALUES ('89', '51', '0', '7', 'tyttyyty', 'pradit_k', '2020-08-26 11:20:23', '0.00');
+INSERT INTO `r_repair_status` VALUES ('90', '51', '0', '7', 'tyttyyty', 'pradit_k', '2020-08-26 11:20:31', '0.00');
+INSERT INTO `r_repair_status` VALUES ('91', '51', '0', '7', 'tyttyyty', 'pradit_k', '2020-08-26 11:20:33', '0.00');
 
 -- ----------------------------
 -- Table structure for r_status
@@ -281,11 +285,17 @@ CREATE TABLE `r_user` (
   `social` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of r_user
 -- ----------------------------
-INSERT INTO `r_user` VALUES ('10', 'pradit_k', null, 'สำนักเทคโนโลยีสารสนเทศ', '13', '1', null, 'ประดิษฐ์ เกลี้ยงเกื้อ', null, null, null, null, null, null, null, null, '0', '2020-04-30 12:26:04', null, null, '2020-04-22 10:22:29', '1', '0');
-INSERT INTO `r_user` VALUES ('21', 'guest30', null, 'สำรองใช้งาน', '5', '3', null, 'guest30', null, null, null, null, null, null, null, null, '0', '2020-04-30 09:27:40', null, null, '2020-04-24 09:52:16', '1', '0');
+INSERT INTO `r_user` VALUES ('10', 'pradit_k', null, 'สำนักเทคโนโลยีสารสนเทศ', '13', '1', null, 'ประดิษฐ์ เกลี้ยงเกื้อ', null, null, null, '0841930039', null, null, null, null, '0', '2020-08-28 08:19:54', null, null, '2020-04-22 10:22:29', '1', '0');
+INSERT INTO `r_user` VALUES ('27', 'guest30', null, 'สำรองใช้งาน', '4', '3', null, 'guest30', null, null, null, null, null, null, null, null, '0', '2020-08-26 11:01:12', null, null, '2020-05-13 15:57:02', '1', '0');
 INSERT INTO `r_user` VALUES ('22', 'elham36', null, 'สำนักเทคโนโลยีสารสนเทศ', '13', '1', null, 'อิลฮัม มุสะอะรง', null, null, null, null, null, null, null, null, '0', '2020-04-30 11:08:15', null, null, '2020-04-30 10:21:11', '1', '0');
+INSERT INTO `r_user` VALUES ('23', 'guest10', null, 'สำรองใช้งาน', '5', '2', null, 'guest10', null, null, null, null, null, null, null, null, '0', '2020-08-26 11:04:25', null, null, '2020-05-08 10:25:17', '1', '0');
+INSERT INTO `r_user` VALUES ('26', 'guest12', null, 'สำรองใช้งาน', '13', '2', null, 'guest12', null, null, null, null, null, null, null, null, '0', '2020-08-26 11:04:50', null, null, '2020-05-12 10:19:09', '1', '0');
+INSERT INTO `r_user` VALUES ('31', 'guest11', null, 'สำรองใช้งาน', '13', '3', null, 'guest11', null, null, null, null, null, null, null, null, '0', '2020-08-26 11:02:05', null, null, '2020-08-25 09:16:47', '1', '0');
+INSERT INTO `r_user` VALUES ('28', 'guest13', null, 'สำรองใช้งาน', '7', '3', null, 'guest13', null, null, null, null, null, null, null, null, '0', '2020-05-27 09:22:42', null, null, '2020-05-18 14:46:45', '1', '0');
+INSERT INTO `r_user` VALUES ('29', 'guest20', null, 'สำรองใช้งาน', '9', '3', null, 'guest20', null, null, null, null, null, null, null, null, '0', '2020-06-02 08:27:59', null, null, '2020-06-02 08:27:59', '1', '0');
+INSERT INTO `r_user` VALUES ('30', 'rawipim_je', null, 'กองยุทธศาสตร์และแผนงาน', '13', '3', null, 'รวิพิมพ์ จีระดิษฐ์', null, null, null, null, null, null, null, null, '0', '2020-08-25 09:12:26', null, null, '2020-08-24 16:27:38', '1', '0');

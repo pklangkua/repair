@@ -1,11 +1,11 @@
-<?php
+<?php /*
  
 $dataPoints = array();
 //Best practice is to create a separate file for handling connection to database
 try{
      // Creating a new connection.
     // Replace your-hostname, your-db, your-username, your-password according to your database
-    $link = new \PDO(   'mysql:host=localhost;dbname=e-insreport;charset=utf8mb4', //'mysql:host=localhost;dbname=canvasjs_db;charset=utf8mb4',
+    $link = new \PDO(   'mysql:host=localhost;dbname=repair;charset=utf8mb4', //'mysql:host=localhost;dbname=canvasjs_db;charset=utf8mb4',
                         'root', //'root',
                         '', //'',
                         array(
@@ -14,20 +14,24 @@ try{
                         )
                     );
 	
-    $handle = $link->prepare('select x, y from datapoints'); 
+    $handle = $link->prepare('SELECT COUNT(r.ID) as cc,o.OfficeName FROM r_data_repair r
+	INNER JOIN r_office o ON o.OfficeID = r.OfficeID
+	WHERE r.UserID ="pradit_k"
+	GROUP BY o.OfficeName'); 
     $handle->execute(); 
     $result = $handle->fetchAll(\PDO::FETCH_OBJ);
 		
     foreach($result as $row){
-        array_push($dataPoints, array("x"=> $row->x, "y"=> $row->y));
+        array_push($dataPoints, array("x"=> $row->cc, "y"=> $row->OfficeName)); 
     }
 	$link = null;
 }
 catch(\PDOException $ex){
     print($ex->getMessage());
 }
-	
+	*/
 ?>
+<!--
 <!DOCTYPE HTML>
 <html>
 <head>  
@@ -43,7 +47,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	},
 	data: [{
 		type: "column", //change type to bar, line, area, pie, etc  
-		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+		dataPoints: <?php  echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
 	}]
 });
 chart.render();
@@ -55,11 +59,29 @@ chart.render();
 <div id="chartContainer" style="height: 370px; width: 80%; aligin:center;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
-</html>
+</html> 
+
+-->
 
 <?php
+
+	$GSQL = "SELECT COUNT(r.ID) as cc,o.OfficeName FROM r_data_repair r
+	INNER JOIN r_office o ON o.OfficeID = r.OfficeID
+	GROUP BY o.OfficeName";
+	//echo $GSQL;
+    $arrData3 = $conn->return_sql($GSQL);
+	$recCount3 = $conn->record_count($GSQL);
+	//echo $GSQL;
+	for ($sLoop3=0;$sLoop3<$recCount3;$sLoop3++)
+	{
+		//echo $arrData2[$sLoopG][0],"<BR>";
+		//echo $arrData2[$sLoopG][2],"<BR>";
+		//dps.push(y : $arrData3[$sLoop3][0]; , "label":$arrData3[$sLoop3][1];)
+		$dataPoints= array(array("y" =>$arrData3[$sLoop3][0], "label" => $arrData3[$sLoop3][1] ));
+		//dps.push(array(array("y" =>$arrData3[$sLoop3][0], "label" => $arrData3[$sLoop3][1] )));
+	}
  
-$dataPoints = array( 
+/*$dataPoints = array( 
 	array("y" => 3373.64, "label" => "ThaiLand" ),
 	array("y" => 2435.94, "label" => "Phattalung" ),
 	array("y" => 1842.55, "label" => "Nakhonsritamarat" ),
@@ -67,7 +89,7 @@ $dataPoints = array(
 	array("y" => 1039.99, "label" => "Satun" ),
 	array("y" => 765.215, "label" => "Trang" ),
 	array("y" => 612.453, "label" => "Puket" )
-);
+);*/
  
 ?>
 <!DOCTYPE HTML>
@@ -80,14 +102,14 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	theme: "light2",
 	title:{
-		text: "Gold Reserves"
+		text: "การแจ้งซ่อม"
 	},
 	axisY: {
-		title: "Gold Reserves (in tonnes)"
+		title: "จำนวนการแจ้งซ่อม (ครั้ง)"
 	},
 	data: [{
 		type: "column",
-		yValueFormatString: "#,##0.## tonnes",
+		yValueFormatString: "#,##0.## ครั้ง",
 		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
 	}]
 });
@@ -100,4 +122,4 @@ chart.render();
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
-</html> 
+</html>  
