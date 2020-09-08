@@ -47,7 +47,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	},
 	data: [{
 		type: "column", //change type to bar, line, area, pie, etc  
-		dataPoints: <?php  echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+		dataPoints: <?php //  echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
 	}]
 });
 chart.render();
@@ -68,30 +68,19 @@ chart.render();
 	$GSQL = "SELECT COUNT(r.ID) as cc,o.OfficeName FROM r_data_repair r
 	INNER JOIN r_office o ON o.OfficeID = r.OfficeID
 	GROUP BY o.OfficeName";
-	//echo $GSQL;
+
     $arrData3 = $conn->return_sql($GSQL);
 	$recCount3 = $conn->record_count($GSQL);
-	//echo $GSQL;
+
 	for ($sLoop3=0;$sLoop3<$recCount3;$sLoop3++)
 	{
-		//echo $arrData2[$sLoopG][0],"<BR>";
-		//echo $arrData2[$sLoopG][2],"<BR>";
-		//dps.push(y : $arrData3[$sLoop3][0]; , "label":$arrData3[$sLoop3][1];)
-		$dataPoints= array(array("y" =>$arrData3[$sLoop3][0], "label" => $arrData3[$sLoop3][1] ));
-		//dps.push(array(array("y" =>$arrData3[$sLoop3][0], "label" => $arrData3[$sLoop3][1] )));
+		$dataPoints[]= array("y" =>$arrData3[$sLoop3][0], "label" => $arrData3[$sLoop3][1] );
+				
 	}
- 
-/*$dataPoints = array( 
-	array("y" => 3373.64, "label" => "ThaiLand" ),
-	array("y" => 2435.94, "label" => "Phattalung" ),
-	array("y" => 1842.55, "label" => "Nakhonsritamarat" ),
-	array("y" => 1828.55, "label" => "Songkhla" ),
-	array("y" => 1039.99, "label" => "Satun" ),
-	array("y" => 765.215, "label" => "Trang" ),
-	array("y" => 612.453, "label" => "Puket" )
-);*/
- 
+     json_encode($dataPoints);
+
 ?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -110,7 +99,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	data: [{
 		type: "column",
 		yValueFormatString: "#,##0.## ครั้ง",
-		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+		dataPoints:  <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
 	}]
 });
 chart.render();
@@ -123,3 +112,4 @@ chart.render();
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>  
+
