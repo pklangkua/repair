@@ -89,7 +89,7 @@ $_SESSION['OfficeID'] = $OfficeID;
                     <a class="nav-link" href="?module=durable">ครุภัณฑ์</a> <!-- style="display:none" -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?module=test" style="display:none">test</a> <!-- style="display:none" -->
+                    <a class="nav-link" href="?module=durprofile" >อุปกรณ์ของฉัน</a> <!-- style="display:none" -->
                 </li>
                 <li class="nav-item dropdown"
                     <?php if($st==1){ echo 'style="display:true"';}else{ echo 'style="display:none"';}?>>
@@ -102,6 +102,7 @@ $_SESSION['OfficeID'] = $OfficeID;
                         <!--<a class="dropdown-item" href="#">Link 2</a> 
                         <a class="dropdown-item" href="#">Link 3</a>-->
                     </div>
+                    
                 </li>
 
             </ul>

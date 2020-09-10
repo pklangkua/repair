@@ -36,6 +36,65 @@ $recCount3 = $conn->record_count($sSql3);
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+<!-- Auto complete-->
+<!--
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">-->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="test/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$(document).ready(function() {
+
+    $("#autocomplete").autocomplete({
+        //source: availableTags
+
+        source: function(request, response) {
+
+            $.ajax({
+                url: "profile/fetchData.php",
+                type: 'post',
+                dataType: "json",
+                data: {
+                    search: request.term
+                },
+                success: function(data) {
+                    // response(data)
+                    response($.map(data, function(item) {
+                        //var code = item.split("|");
+                        return {
+                            label: item.label + ' :: ' + item.value,
+                            label2: item.label,
+                            value2: item.value,
+                            office: item.office,
+                            officeID: item.officeID,
+                            HardwareID: item.HardwareID
+                        }
+                    }));
+
+                }
+            });
+        },
+        select: function(event, ui) {
+            $('#autocomplete').val(ui.item.label2) //display the selected text
+            $('#selectuser_id').val(ui.item.value2); // save selected id to input
+            $('#office').val(ui.item.office); //
+            $('#officeID').val(ui.item.officeID); //HardwareID
+            $('#HardwareID').val(ui.item.HardwareID); //HardwareID
+            return false;
+        }
+
+
+    });
+});
+</script>
 <hr>
 <div class="container bootstrap snippet">
     <div class="row">
@@ -51,12 +110,19 @@ $recCount3 = $conn->record_count($sSql3);
             <!--left http://ssl.gstatic.com/accounts/ui/avatar_2x.png col-->
 
             <form action="../repair/profile/upload.php" method="post" enctype="multipart/form-data">
-            <div class="text-center">
-                <img src="../repair/profile/img/profile.png" class="avatar img-circle img-thumbnail" alt="avatar">
-                <h6 style="display:none">Upload a different photo...</h6><BR><BR>
-                <input type="file" class="text-center center-block file-upload" name="img"><br>
-                <input type="submit" value="แก้ไขรูป" name="submit">
-            </div>
+                <div class="text-center">
+                    <img src="../repair/profile/img/<?php if($img==''){ echo "profile.png"; }else{ echo $img;}?>"
+                        class="avatar img-circle img-thumbnail" alt="avatar">
+                    <h6 style="display:none">Upload a different photo...</h6><BR><BR>
+
+                    <input type="file" name="fileToUpload" id="fileToUpload"><br>
+                    <input type="submit" value="แก้ไขรูป" name="submit">
+                    <input type="hidden" name="id" value="<?=$id?>">
+                    <!--
+                    <input type="file" class="text-center center-block file-upload" name="img"><br>
+                    <input type="submit" value="แก้ไขรูป" name="submit">
+                -->
+                </div>
             </form>
             </hr><br>
 
@@ -97,7 +163,8 @@ $recCount3 = $conn->record_count($sSql3);
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
                     <hr>
-                    <form class="form" action="../repair/profile/update_profile.php" method="post" id="registrationForm">
+                    <form class="form" action="../repair/profile/update_profile.php" method="post"
+                        id="registrationForm">
                         <div class="form-group">
 
                             <div class="col-xs-6">
@@ -126,7 +193,7 @@ $recCount3 = $conn->record_count($sSql3);
                                 <label for="phone">
                                     <h4>โทรศัพท์</h4>
                                 </label>
-                                <input type="text" class="form-control" name="phone" id="phone"
+                                <input type="number" class="form-control" name="phone" id="phone"
                                     placeholder="enter phone" title="enter your phone number if any."
                                     value="<?=$phone?>">
                             </div>
@@ -148,7 +215,7 @@ $recCount3 = $conn->record_count($sSql3);
                                     <h4>E-mail</h4>
                                 </label>
                                 <input type="email" class="form-control" name="email" id="email"
-                                    placeholder="you@email.com" title="enter your email." value="<?=$email?>" >
+                                    placeholder="you@email.com" title="enter your email." value="<?=$email?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -165,13 +232,12 @@ $recCount3 = $conn->record_count($sSql3);
                                                 {
                                                 //print $arrData[$sLoop][0] . "-" .  $arrData[$sLoop][1] . "";
                                             ?>
-                                    <option value="<?=$arrData3[$sLoop][0]?>" 
-                                    <?php
+                                    <option value="<?=$arrData3[$sLoop][0]?>" <?php
                                      if($arrData3[$sLoop][0]==$OfficeID)
                                      {
                                         echo "selected";
                                      }
-                                    ?> ><?=$arrData3[$sLoop][3]?></option>
+                                    ?>><?=$arrData3[$sLoop][3]?></option>
                                     <?php }}?>
                                 </select>
                             </div>
@@ -201,7 +267,8 @@ $recCount3 = $conn->record_count($sSql3);
                                 <br>
                                 <button class="btn btn-lg btn-success" type="submit"><i
                                         class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                <button class="btn btn-lg" type="reset" style="display:none"><i class="glyphicon glyphicon-repeat"></i>
+                                <button class="btn btn-lg" type="reset" style="display:none"><i
+                                        class="glyphicon glyphicon-repeat"></i>
                                     Reset</button>
                             </div>
                         </div>
@@ -217,100 +284,82 @@ $recCount3 = $conn->record_count($sSql3);
                     <h2></h2>
 
                     <hr>
-                    <form class="form" action="##" method="post" id="registrationForm">
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="first_name">
-                                    <h4>First name</h4>
-                                </label>
-                                <input type="text" class="form-control" name="first_name" id="first_name"
-                                    placeholder="first name" title="enter your first name if any.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="last_name">
-                                    <h4>Last name</h4>
-                                </label>
-                                <input type="text" class="form-control" name="last_name" id="last_name"
-                                    placeholder="last name" title="enter your last name if any.">
-                            </div>
-                        </div>
+                    <form class="form" action="../repair/profile/update_device.php" method="post" id="registrationForm">
 
                         <div class="form-group">
+                            <label for="comment" class="mr-sm-2"> พัสดุ </label>
+                            <input type="text" class="form-control mr-sm-2" name="HardwareName"
+                                placeholder="ค้นหาพัสดุโดย ชื่อ,เลขทะเบียน" id="autocomplete">
+                            <br><label class="mr-sm-2">เลขทะเบียน </label>
+                            <input type="text" class="form-control" name="HardwareCode" placeholder="เลขทะเบียน"
+                                id="selectuser_id">
+                            <input type="hidden" name="HardwareID" id="HardwareID">
+                        </div>
+                        <div class="col-xs-12">
+                            <br>
 
-                            <div class="col-xs-6">
-                                <label for="phone">
-                                    <h4>Phone</h4>
-                                </label>
-                                <input type="text" class="form-control" name="phone" id="phone"
-                                    placeholder="enter phone" title="enter your phone number if any.">
-                            </div>
+                            <button class="btn btn-lg btn-success" type="submit"><i
+                                    class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                            <button class="btn btn-lg" type="reset" style="display:none"><i
+                                    class="glyphicon glyphicon-repeat"></i>
+                                Reset</button>
                         </div>
+                        <input type="hidden" name="id" value="<?=$user?>">
 
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="mobile">
-                                    <h4>Mobile</h4>
-                                </label>
-                                <input type="text" class="form-control" name="mobile" id="mobile"
-                                    placeholder="enter mobile number" title="enter your mobile number if any.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h4>Email</h4>
-                                </label>
-                                <input type="email" class="form-control" name="email" id="email"
-                                    placeholder="you@email.com" title="enter your email.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h4>Location</h4>
-                                </label>
-                                <input type="email" class="form-control" id="location" placeholder="somewhere"
-                                    title="enter a location">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password">
-                                    <h4>Password</h4>
-                                </label>
-                                <input type="password" class="form-control" name="password" id="password"
-                                    placeholder="password" title="enter your password.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password2">
-                                    <h4>Verify</h4>
-                                </label>
-                                <input type="password" class="form-control" name="password2" id="password2"
-                                    placeholder="password2" title="enter your password2.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <br>
-                                <button class="btn btn-lg btn-success" type="submit"><i
-                                        class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i>
-                                    Reset</button>
-                            </div>
-                        </div>
                     </form>
+                    <br><br><br><br>
+                    <table class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>ชื่อครุภัณฑ์</th>
+                                <th>เลขครุภัณฑ์</th>
+                                <th>ลบ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            $dSql = "SELECT * FROM r_device where d_user='$user'";
+                            $arrData_d = $conn->return_sql($dSql);
+                            $recCount_d = $conn->record_count($dSql);
+                            if($recCount_d>0){
+	                            for ($sLoopd=0;$sLoopd<$recCount_d;$sLoopd++){
+		//print $arrData[$sLoop][0] . "-" .  $arrData[$sLoop][1] . "";
+	                        ?>
+
+                            <tr>
+                                <td><?=$sLoopd+1?></td>
+                                <td><?=$arrData_d[$sLoopd][2]?></td>
+                                <td><?=$arrData_d[$sLoopd][3]?></td>
+                                <td>
+                                    <button style="display:none" type="button" class="btn btn-info "
+                                        onclick="window.location.href = '?module=profile&&detailID=<?=$arrData_d[$sLoopd][0]?>';"
+                                        title="รายละเอียด">
+                                        <!--i class="fas fa-database"--><i class="fas fa-trash-alt"></i>
+                                    </button>
+
+                                    <a href="profile/delete.php?id=<?=$arrData_d[$sLoopd][0]?>"
+                                        onClick="return confirm('Are you sure you want to delete?')">Delete</a>
+
+                                    <button style="display:none" type="submit" class="btn btn-info ">
+                                        <!--i class="fas fa-database"--><i class="fas fa-trash-alt"></i>
+                                    </button>
+                                    <button style="display:none" type="button" class="btn btn-danger edit "
+                                        title="ดำเนินการ" data-toggle="modal" data-target="#myModal"
+                                        id="<?=$arrData[$sLoop][0]?>" fname="<?=$arrData[$sLoop][3]?>"><i
+                                            class="fas fa-desktop"></i></button>
+                                </td>
+
+
+
+                            </tr><?php  } }?>
+                        </tbody>
+                    </table>
 
                 </div>
+
+
+            </div>
         </div>
         <!--/tab-content-->
 
@@ -318,3 +367,18 @@ $recCount3 = $conn->record_count($sSql3);
     <!--/col-9-->
 </div>
 <!--/row-->
+<script type='text/javascript'>
+$(document).ready(function() {
+    $(function() {
+
+    })
+})
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>

@@ -191,16 +191,18 @@ $recCount3 = $conn->record_count($sSql3);
 $(document).ready(function() {
     $('#example').DataTable();
 
-    $('.edit').on('click', function() {
+    $("body").on("click", ".edit", function(event) {
+    /*$('.edit').on('click', function() {*/
         var uid = $(this).attr("id");
         $('#id').val(uid);
     });
-
-    $('.delete').on('click', function() {
+    $("body").on("click", ".delete", function(event) {
+    //$('.delete').on('click', function() {
         var uid = $(this).attr("id");
         $('#idDelete').val(uid);
     });
-    $('.update').on('click', function() {
+    $("body").on("click", ".update", function(event) {
+    //$('.update').on('click', function() {
         var uid = $(this).attr("id");
         $('#idUpdate').val(uid);
     });
