@@ -81,8 +81,17 @@ $(document).ready(function() {
     </div>
 </div>
 </div> -->
-
-<form action="history-repair/insert_repair.php" method="post">
+<script type="text/javascript">
+function fncSubmit()
+{
+    if(document.getElementById('comment').value == "")
+    {
+        alert('PLEASE INPUT DATA');
+        return false;
+    }
+}
+</script>
+<form action="history-repair/insert_repair.php" onSubmit="JavaScript:return fncSubmit();" method="post">
     <div class="card border-light mb-3" style="max-width:">
         <div class="card-header">แจ้งซ่อม/เพิ่ม</div>
         <div class="card-body">
