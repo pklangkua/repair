@@ -109,15 +109,15 @@ function fncSubmit()
                                     <label for="comment" class="mr-sm-2"> พัสดุ </label>
                                     <input type="text" class="form-control mr-sm-2" name="HardwareName"
                                         placeholder="ค้นหาพัสดุโดย ชื่อ,เลขทะเบียน" id="autocomplete">
-                                    <br><label class="mr-sm-2">เลขทะเบียน </label>
+                                    <br><label class="mr-sm-2" >เลขทะเบียน </label>
                                     <input type="text" class="form-control" name="HardwareCode" placeholder="เลขทะเบียน"
-                                        id="selectuser_id">
+                                        id="selectuser_id" readonly>
                                 </div>
                                 <div class="form-group">
                                     <br>
                                     <label for="comment">หน่วยงาน</label>
                                     <input type="text" class="form-control" name="office" id="office"
-                                        placeholder="หน่วยงาน">
+                                        placeholder="หน่วยงาน" readonly>
                                     <input type="hidden" class="form-control" name="HardwareID" id="HardwareID">
                                     <input type="hidden" class="form-control" name="officeID" id="officeID">
                                 </div>

@@ -35,7 +35,7 @@ if($status =='3')
     <div class="row">
         <div class="col">
         </div>
-        <div class="col">
+        <div class="col-3">
 
             <div class="card text-center ">
                 <div class="card-header bg-success">
@@ -52,14 +52,14 @@ if($status =='3')
             </div>
 
         </div>
-        <div class="col">
-            <div class="card text-center  ">
+       <!-- <div class="col">
+            <div class="card text-center  " style="display:none">
                 <div class="card-header bg-info">
                     <h4>สมาชิก</h4>
                 </div>
                 <div class="card-body bg-light">
                     <h5 class="card-title ">สมาชิก ทั้งหมด</h5>
-                    <p class="card-text">จำนวน <?=$recCount?> คน</p>
+                    <p class="card-text">จำนวน <? //=$recCount?> คน</p>
 
                 </div>
                 <div class="card-footer ">
@@ -67,7 +67,7 @@ if($status =='3')
                 </div>
             </div>
 
-        </div>
+        </div> -->
         <div class="col">
 
         </div>

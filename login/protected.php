@@ -25,13 +25,13 @@ if(!isset($_SESSION['user'])) {
 			$sSql = "UPDATE r_user set lastvisit_login = NOW(),department='$department' WHERE username ='$username'";
 			//echo $sSql;
 			$conn->exe($sSql);
-			header("Location: ../index.php?module=");
+			header("Location: ../index.php?module=profile");
 		}else 
 		{
 			$sSql = "INSERT r_user (id,username,fullname,create_date,lastvisit_login,department) VALUES (null,'$username','$fullname',NOW(),NOW(),'$department' )";
 			$conn->exe($sSql);
 		
-			header("Location: ../index.php?module=");
+			header("Location: ../index.php?module=profile");
 		}
 
 	

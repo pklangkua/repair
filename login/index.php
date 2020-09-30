@@ -105,6 +105,7 @@ if(isset($_GET['out'])) header("Location: index.php");*/
                 <div class="checkbox mb-3">
 
                 </div>
+                <H6>* หมายเหตุ: การเข้าใช้งานให้ใช้ Username และ Password ที่ใช้งานกับ Internet </H6>
                 <button class="btn btn-lg btn-dark btn-block" type="submit">เข้าสู่ระบบ</button><br>
                 <?php
         if(isset($error)) {?>
