@@ -8,6 +8,17 @@ $Officename= $_POST['Officename'];
 $HardwareID= $_POST['HardwareID'];
 //echo $userid;
 ?>
+
+<script type="text/javascript">
+function fncSubmit()
+{
+    if(document.getElementById('comment').value == "")
+    {
+        alert('PLEASE INPUT DATA');
+        return false;
+    }
+}
+</script>
 <div class="card border-light mb-3" style="max-width: 100rem;">
     <div class="card-header">
         <h4>รายละเอียดการซ่อม</h4>
@@ -15,7 +26,7 @@ $HardwareID= $_POST['HardwareID'];
     <div class="card-body ">
             <div class="form-group">
                 <label for="comment" class="mr-sm-2"> พัสดุ </label>
-                <input type="text" class="form-control mr-sm-2" name="HardwareName" value='<?=$HardwareName?>' >
+                <input type="text" class="form-control mr-sm-2" name="HardwareName" value='<?=$HardwareName?>' readonly >
                 
                 <br><label class="mr-sm-2">เลขทะเบียน </label>
                 <input type="text" class="form-control" name="HardwareCode" value='<?=$HardwareCode?>' >

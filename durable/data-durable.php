@@ -80,8 +80,15 @@ $recCount = $conn2->record_count($sSql);
 
 
 </form>
-
-<form method="post" action="history-repair/insert_repair.php" name="frmRepair">
+<script type="text/javascript">
+function fncSubmit2() {
+    if (document.getElementById('detail').value === "") {
+        alert('กรุณากรอกข้อมูลให้ถูกต้อง');
+        return false;
+    }
+}
+</script>
+<form method="post" action="history-repair/insert_repair.php" name="frmRepair" onSubmit="JavaScript:return fncSubmit2();">
 
     <div id="DurableRepair" class="modal modal-child fade  bd-example-modal-lg" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
@@ -125,16 +132,12 @@ $recCount = $conn2->record_count($sSql);
             <td><?=$result['OfficeName']?></td>
             <td>
 
-                <button type="button" class="btn btn-info btn-sm view_data" id='<?=$result['HardwareID']?>' data-target="#DurableDetail"
-                    data-toggle="modal"><i class="fas fa-edit"></i> รายละเอียด</button>
+                <button type="button" class="btn btn-info btn-sm view_data" id='<?=$result['HardwareID']?>'
+                    data-target="#DurableDetail" data-toggle="modal"><i class="fas fa-edit"></i> รายละเอียด</button>
                 <button type="button" class="btn btn-danger btn-sm repair" data-target="#DurableRepair"
-                    data-toggle="modal" 
-                    id2=<?=$user?>
-                    hname='<?=$result['HardwareName']?>' 
-                    OfficeID='<?=$result['OfficeID']?>' 
-                    HardwareCode='<?=$result['HardwareCode']?>'
-                    Officename='<?=$result['OfficeName']?>'
-                    HardwareID='<?=$result['HardwareID']?>'> 
+                    data-toggle="modal" id2=<?=$user?> hname='<?=$result['HardwareName']?>'
+                    OfficeID='<?=$result['OfficeID']?>' HardwareCode='<?=$result['HardwareCode']?>'
+                    Officename='<?=$result['OfficeName']?>' HardwareID='<?=$result['HardwareID']?>'>
                     <i class="fas fa-edit"></i> แจ้งซ่อม</button>
             </td>
         </tr>
@@ -197,7 +200,7 @@ $(document).ready(function() {
                 Officename: Officename,
                 HardwareCode: HardwareCode,
                 OfficeID: OfficeID,
-                HardwareID:HardwareID
+                HardwareID: HardwareID
             },
             success: function(response) {
                 // Add response in Modal body

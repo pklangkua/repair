@@ -163,6 +163,7 @@ $(document).ready(function() {
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
                     <hr>
+
                     <form class="form" action="../repair/profile/update_profile.php" method="post"
                         id="registrationForm">
                         <div class="form-group">
@@ -284,15 +285,27 @@ $(document).ready(function() {
                     <h2></h2>
 
                     <hr>
-                    <form class="form" action="../repair/profile/update_device.php" method="post" id="registrationForm">
+
+                    <script type="text/javascript">
+                    function fncSubmit3() {
+                        if (document.getElementById('autocomplete').value == "" && document.getElementById(
+                                'HardwareID').value == "") {
+                            alert('กรุณากรอกข้อมูลให้ถูกต้อง');
+                            return false;
+                        }
+                    }
+                    </script>
+                    <form class="form" action="../repair/profile/update_device.php"
+                        onSubmit="JavaScript:return fncSubmit3();" method="post" id="registrationForm">
 
                         <div class="form-group">
                             <label for="comment" class="mr-sm-2"> พัสดุ </label>
+                            <font color="red"> * กรุณากรอกข้อมูล </font>
                             <input type="text" class="form-control mr-sm-2" name="HardwareName"
                                 placeholder="ค้นหาพัสดุโดย ชื่อ,เลขทะเบียน" id="autocomplete">
                             <br><label class="mr-sm-2">เลขทะเบียน </label>
                             <input type="text" class="form-control" name="HardwareCode" placeholder="เลขทะเบียน"
-                                id="selectuser_id">
+                                id="selectuser_id" readonly>
                             <input type="hidden" name="HardwareID" id="HardwareID">
                         </div>
                         <div class="col-xs-12">

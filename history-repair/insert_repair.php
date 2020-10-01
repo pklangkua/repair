@@ -20,6 +20,12 @@ if(isset($_POST['HardwareName']) && isset($_POST['HardwareID'])&& isset($_POST['
     $UserID = $_POST['UserID'];
     $UserOfficeID =$_SESSION['OfficeID'];
 
+   /* if($comment=="")
+    {
+        echo '<script type="text/javascript">alert("xxxx")</script>';
+        header("Location:/repair/index.php?module=durable");
+    }*/
+
     $sql = "INSERT INTO r_data_repair (HardwareID,HardwareCode,HardwareName,OfficeID,Detail,Comment,UserID,UserOfficeID,DateRepair)".
     $sql = " VALUES ('$HardwareID','$HardwareCode','$HardwareName','$officeID','$detail','$comment','$UserID','$UserOfficeID',NOW())";
     

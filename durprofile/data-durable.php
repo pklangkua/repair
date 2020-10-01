@@ -66,7 +66,7 @@ $recCount = $conn2->record_count($sSql);
 
 </form>
 
-<form method="post" action="history-repair/insert_repair.php" name="frmRepair">
+<form method="post" action="history-repair/insert_repair.php"   name="frmRepair">
 
     <div id="DurableRepair" class="modal modal-child fade  bd-example-modal-lg" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
@@ -79,14 +79,12 @@ $recCount = $conn2->record_count($sSql);
 
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary" value="Save">
+                    <input type="submit" class="btn btn-primary" value="Save" >
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-
-
 </form>
 
 <table id="durable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">

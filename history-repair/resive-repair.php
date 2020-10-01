@@ -86,7 +86,7 @@ function fncSubmit()
 {
     if(document.getElementById('comment').value == "")
     {
-        alert('PLEASE INPUT DATA');
+        alert('กรุณากรอกข้อมูลให้ถูกต้อง');
         return false;
     }
 }
@@ -106,7 +106,7 @@ function fncSubmit()
                         <div class="card-body ">
                             <form method="post" action="?module=resive-repair">
                                 <div class="form-group">
-                                    <label for="comment" class="mr-sm-2"> พัสดุ </label>
+                                    <label for="comment" class="mr-sm-2"> พัสดุ </label><font color="red"> * กรุณากรอกข้อมูล </font>
                                     <input type="text" class="form-control mr-sm-2" name="HardwareName"
                                         placeholder="ค้นหาพัสดุโดย ชื่อ,เลขทะเบียน" id="autocomplete">
                                     <br><label class="mr-sm-2" >เลขทะเบียน </label>
@@ -123,7 +123,7 @@ function fncSubmit()
                                 </div>
                                 <div class="form-group">
                                     <br>
-                                    <label for="comment">รายละเอียดการซ่อม/ปัญหา</label>
+                                    <label for="comment">รายละเอียดการซ่อม/ปัญหา</label><font color="red"> * กรุณากรอกข้อมูล </font>
                                     <textarea class="form-control" rows="5" id="comment" name="detail"></textarea>
                                 </div>
                                 <div class="form-group">
