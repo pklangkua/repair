@@ -84,9 +84,13 @@ $(document).ready(function() {
 <script type="text/javascript">
 function fncSubmit()
 {
-    if(document.getElementById('comment').value == "")
+    if(document.getElementById('comment').value == ""  )
     {
         alert('กรุณากรอกข้อมูลให้ถูกต้อง');
+        return false;
+    }else if(document.getElementById('selectuser_id').value == "")
+    {
+        alert('กรุณากรอกข้อมูลเลขทะเบียนให้ถูกต้อง');
         return false;
     }
 }

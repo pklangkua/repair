@@ -10,18 +10,18 @@ $ConMysql = new connectDB ;
 $cat = new category;
 
 $sSql = "SELECT r.ID,
-r.HardwareID,
-r.HardwareCode,
-r.HardwareName,
-r.OfficeID,
-r.Detail,
-r.`Comment`,
-r.UserID,
-r.UserOfficeID,
-r.CategoryID,
-r.DateRepair,
-u.fullname FROM r_data_repair r inner join r_user u  on u.username = r.UserID
-WHERE r.UserOfficeID ='$UserOfficeID' AND r.CategoryID not in(7,1) AND  r.UserRecive = '$user'";
+            r.HardwareID,
+            r.HardwareCode,
+            r.HardwareName,
+            r.OfficeID,
+            r.Detail,
+            r.`Comment`,
+            r.UserID,
+            r.UserOfficeID,
+            r.CategoryID,
+            r.DateRepair,
+            u.fullname FROM r_data_repair r inner join r_user u  on u.username = r.UserID
+            ";
 $arrData = $ConMysql->return_sql($sSql);
 $recCount = $ConMysql->record_count($sSql);
 
@@ -30,10 +30,10 @@ $recCount = $ConMysql->record_count($sSql);
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> 
-
 
 <form method="post" action="" name="">
 
@@ -57,16 +57,7 @@ $recCount = $ConMysql->record_count($sSql);
 
 </form>
 
-<script type="text/javascript">
-function fncSubmit2() {
-    if (document.getElementById('detail_id').value == "") 
-    {
-        alert('กรุณากรอกข้อมูลให้ถูกต้อง');
-        return false;
-    }
-}
-</script>
-<form method="post" action="/repair/recive-repair/Insert_status.php" name="frmInsertStatus" onSubmit="JavaScript:return fncSubmit2();">
+<form method="post" action="/repair/recive-repair/Insert_status.php" name="frmInsertStatus">
     <div id="myModal" class="modal modal-child fade addNewRequestModal" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
         <div class="modal-dialog modal-md">
@@ -79,8 +70,8 @@ function fncSubmit2() {
 
                     <div class="form-group">
                         <label>สถานะ</label>
-                        <select class="form-control" name="sellist1" id="sellist1">
-                            <!-- <option>------------------ เลือก ------------------</option> -->
+                        <select class="form-control" name="sellist1">
+                            <option>------------------ เลือก ------------------</option>
                             <?php  
                             $SQL = "SELECT * FROM r_category WHERE id BETWEEN '2'AND'10'";
                             $arrData2 = $ConMysql->return_sql($SQL);
@@ -96,19 +87,14 @@ function fncSubmit2() {
                         </select></div>
                     <div class="form-group">
                         <label>รายละเอียด</label>
-                        <textarea class="form-control" name="detail" id="detail_id" cols="50" rows="5"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>ราคา</label>
-                        <!--<input type="number" name="price" id="price" /> -->
-                        <input type="number" name="price" placeholder="1.0" step="0.01" min="0" max="10000" id="price">
+                        <textarea class="form-control" name="detail" id="" cols="50" rows="5"></textarea>
                     </div>
 
                 </div>
                 <div class="modal-footer">
 
                     <input type="hidden" name="id" id="id" />
-                    <input type="submit" class="btn btn-primary" value="Save">
+                    <input type="submit" class="btn btn-primary" value="Save" >
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -129,7 +115,6 @@ function fncSubmit2() {
             <th>วันที่แจ้งซ่อม</th>
             <th>สถานะ</th>
             <th>รายละเอียด</th>
-            <th>ผู้แจ้ง</th>
         </tr>
     </thead>
     <tbody>
@@ -151,19 +136,6 @@ function fncSubmit2() {
 
             </th>
             <td><?=$arrData[$sLoop][11]?></td>
-            <td>
-
-                <button type="button" class="btn btn-info "
-                    onclick="window.location.href = '?module=data-history-detail&&detailID=<?=$arrData[$sLoop][0]?>';"
-                    title="รายละเอียด">
-                    <!--i class="fas fa-database"--><i class="fas fa-edit"></i> </button>
-                
-                <button type="button" class="btn btn-danger edit " title="ดำเนินการ" data-toggle="modal"
-                    data-target="#myModal" id="<?=$arrData[$sLoop][0]?>" fname="<?=$arrData[$sLoop][3]?>"><i
-                        class="fas fa-desktop"></i></button>
-            </td>
-            
-
 
         </tr><?php  } }?>
     </tbody>
@@ -176,7 +148,6 @@ function fncSubmit2() {
             <th>วันที่แจ้งซ่อม</th>
             <th>สถานะ</th>
             <th>รายละเอียด</th>
-            <th>ผู้แจ้ง</th>
 
         </tr>
     </tfoot>

@@ -42,6 +42,9 @@ include ("master/head.php");
        }else if($_GET["module"]=="durprofile")
        {
         include("durprofile/durable.php");
+       }else if($_GET["module"]=="sumrepair")
+       {
+        include("sumrepair/sum-repair.php");
        }
        else if($_GET["module"]=="error")
        {

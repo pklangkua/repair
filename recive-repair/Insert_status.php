@@ -5,10 +5,11 @@ ob_start();
   $sel = $_POST["sellist1"];
   $detail = $_POST["detail"];
   $IDrepair = $_POST["id"];
+  $price = $_POST["price"];
   $sentLine = new Line;
   
     $conn = new connectDB ;
-    $sSql = "INSERT INTO r_repair_status VALUES(null,'$IDrepair','0','$sel','$detail','$user',NOW(),'0.00');";
+    $sSql = "INSERT INTO r_repair_status VALUES(null,'$IDrepair','0','$sel','$detail','$user',NOW(),'$price');";
     $conn->exe($sSql);
 
     $conn2 = new connectDB ;

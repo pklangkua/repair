@@ -29,7 +29,7 @@ $HardwareID= $_POST['HardwareID'];
             <div class="form-group">
                 <br>
                 <label for="comment">รายละเอียดการซ่อม/ปัญหา</label><font color="red"> * กรุณากรอกข้อมูล </font>
-                <textarea class="form-control" rows="5" name="detail" id="detail" ></textarea>
+                <textarea class="form-control" rows="5" name="detail" id="textarea" ></textarea>
             </div>
             <div class="form-group">
                 <br><label class="mr-sm-2">หมายเหตุ </label>

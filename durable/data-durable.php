@@ -82,8 +82,8 @@ $recCount = $conn2->record_count($sSql);
 </form>
 <script type="text/javascript">
 function fncSubmit2() {
-    if (document.getElementById('detail').value === "") {
-        alert('กรุณากรอกข้อมูลให้ถูกต้อง');
+    if (document.getElementById('textarea').value == "") {
+        alert(document.getElementById('textarea').value);
         return false;
     }
 }

@@ -109,14 +109,23 @@ $(document).ready(function() {
         <div class="col-sm-3">
             <!--left http://ssl.gstatic.com/accounts/ui/avatar_2x.png col-->
 
-            <form action="../repair/profile/upload.php" method="post" enctype="multipart/form-data">
+            <script type="text/javascript">
+            function fncSubmit2() {
+                if (document.getElementById('fileToUpload').value == "") {
+                    alert('กรุณาเลือกรูปภาพ');
+                    return false;
+                }
+            }
+            </script>
+            <form action="../repair/profile/upload.php" method="post" enctype="multipart/form-data"
+                onSubmit="JavaScript:return fncSubmit2();">
                 <div class="text-center">
                     <img src="../repair/profile/img/<?php if($img==''){ echo "profile.png"; }else{ echo $img;}?>"
                         class="avatar img-circle img-thumbnail" alt="avatar">
                     <h6 style="display:none">Upload a different photo...</h6><BR><BR>
 
                     <input type="file" name="fileToUpload" id="fileToUpload"><br>
-                    <input type="submit" value="แก้ไขรูป" name="submit">
+                    <input type="submit" value="บันทึก" name="submit">
                     <input type="hidden" name="id" value="<?=$id?>">
                     <!--
                     <input type="file" class="text-center center-block file-upload" name="img"><br>
@@ -267,7 +276,7 @@ $(document).ready(function() {
                             <div class="col-xs-12">
                                 <br>
                                 <button class="btn btn-lg btn-success" type="submit"><i
-                                        class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                        class="glyphicon glyphicon-ok-sign"></i> บันทึก</button>
                                 <button class="btn btn-lg" type="reset" style="display:none"><i
                                         class="glyphicon glyphicon-repeat"></i>
                                     Reset</button>
@@ -288,7 +297,7 @@ $(document).ready(function() {
 
                     <script type="text/javascript">
                     function fncSubmit3() {
-                        if (document.getElementById('autocomplete').value == "" && document.getElementById(
+                        if (document.getElementById('autocomplete').value == "" || document.getElementById(
                                 'HardwareID').value == "") {
                             alert('กรุณากรอกข้อมูลให้ถูกต้อง');
                             return false;
@@ -312,7 +321,7 @@ $(document).ready(function() {
                             <br>
 
                             <button class="btn btn-lg btn-success" type="submit"><i
-                                    class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                    class="glyphicon glyphicon-ok-sign"></i> บันทึก</button>
                             <button class="btn btn-lg" type="reset" style="display:none"><i
                                     class="glyphicon glyphicon-repeat"></i>
                                 Reset</button>
