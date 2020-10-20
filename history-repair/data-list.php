@@ -47,7 +47,7 @@ $recCount = $ConMysql->record_count($sSql);
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
         </div>
@@ -93,8 +93,8 @@ $recCount = $ConMysql->record_count($sSql);
                 <div class="modal-footer">
 
                     <input type="hidden" name="id" id="id" />
-                    <input type="submit" class="btn btn-primary" value="Save">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="บันทึก">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
         </div>

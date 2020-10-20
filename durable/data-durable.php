@@ -72,7 +72,7 @@ $recCount = $conn2->record_count($sSql);
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
         </div>
@@ -101,8 +101,8 @@ function fncSubmit2() {
 
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary" value="Save">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="บันทึก">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@ function fncSubmit2() {
             <th>ลำดับ</th>
             <th>เลขครุภัณฑ์</th>
             <th>ชื่อครุภัณฑ์</th>
-            <th>ประเภทครุภัณ์</th>
+            <th>ประเภทครุภัณฑ์</th>
             <th>หน่วยงาน</th>
             <th>รายละเอียด</th>
         </tr>
@@ -148,7 +148,7 @@ function fncSubmit2() {
             <th>ลำดับ</th>
             <th>เลขครุภัณฑ์</th>
             <th>ชื่อครุภัณฑ์</th>
-            <th>ประเภทครุภัณ์</th>
+            <th>ประเภทครุภัณฑ์</th>
             <th>หน่วยงาน</th>
             <th>รายละเอียด</th>
         </tr>

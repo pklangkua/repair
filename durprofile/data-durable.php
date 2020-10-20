@@ -57,7 +57,7 @@ $recCount = $conn2->record_count($sSql);
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
         </div>
@@ -79,8 +79,8 @@ $recCount = $conn2->record_count($sSql);
 
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary" value="Save" >
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="บันทึก" >
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
         </div>
@@ -93,7 +93,7 @@ $recCount = $conn2->record_count($sSql);
             <th>ลำดับ</th>
             <th>เลขครุภัณฑ์</th>
             <th>ชื่อครุภัณฑ์</th>
-            <th>ประเภทครุภัณ์</th>
+            <th>ประเภทครุภัณฑ์</th>
             <th>หน่วยงาน</th>
             <th>รายละเอียด</th>
         </tr>
@@ -147,7 +147,7 @@ $recCount = $conn2->record_count($sSql);
             <th>ลำดับ</th>
             <th>เลขครุภัณฑ์</th>
             <th>ชื่อครุภัณฑ์</th>
-            <th>ประเภทครุภัณ์</th>
+            <th>ประเภทครุภัณฑ์</th>
             <th>หน่วยงาน</th>
             <th>รายละเอียด</th>
         </tr>

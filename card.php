@@ -23,13 +23,17 @@ if($status =='3')
     $arrData2 = $conn->return_sql($SQL);
     $recCount2 = $conn->record_count($SQL); 
     //print $SQL ;  
-}else 
+}else if($status =='1')
 {
-    $SQL = "SELECT * FROM r_data_repair ";
+    $SQL = "SELECT * FROM r_data_repair WHERE UserID ='$user'";
     $arrData2 = $conn->return_sql($SQL);
     $recCount2 = $conn->record_count($SQL); 
-    //print $status ;
 }
+    $SQL3 = "SELECT * FROM r_data_repair ";
+    $arrData3 = $conn->return_sql($SQL3);
+    $recCount3 = $conn->record_count($SQL3); 
+    //print $status ;
+//echo $SQL;
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -52,32 +56,32 @@ if($status =='3')
             </div>
 
         </div>
-       <!-- <div class="col">
-            <div class="card text-center  " style="display:none">
+        <div class="col">
+            <div class="card text-center  " style="display:true">
                 <div class="card-header bg-info">
-                    <h4>สมาชิก</h4>
+                    <h4>จำนวนรายการซ่อม</h4>
                 </div>
                 <div class="card-body bg-light">
-                    <h5 class="card-title ">สมาชิก ทั้งหมด</h5>
-                    <p class="card-text">จำนวน <? //=$recCount?> คน</p>
+                    <h5 class="card-title ">จำนวนรายการซ่อมทั้งหมด</h5>
+                    <p class="card-text">จำนวน <?=$recCount3?> รายการ</p>
 
                 </div>
                 <div class="card-footer ">
-                    <a href="index.php?module=member" class="btn btn-info">รายละเอียด</a>
+                    <a href="index.php?module=sumrepair" class="btn btn-info" style="display:true">รายละเอียด</a>
                 </div>
             </div>
 
-        </div> -->
+        </div>
         <div class="col">
 
         </div>
     </div>
-<BR>
+    <BR>
     <div class="row">
         <div class="col-2">
         </div>
         <div class="col">
-        <?php include("chart.php")?>
+            <?php include("chart.php")?>
         </div>
         <div class="col-2">
         </div>

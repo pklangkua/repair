@@ -1,5 +1,5 @@
 <div class="card border-light mb-3" style="max-width:">
-    <div class="card-header">ครุภัณฑ์</div>
+    <div class="card-header">แจ้งซ่อมครุภัณฑ์</div>
     <div class="card-body">
         <div class="row">
             <div class="col">

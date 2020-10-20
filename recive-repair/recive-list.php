@@ -26,13 +26,13 @@ $arrData = $ConMysql->return_sql($sSql);
 $recCount = $ConMysql->record_count($sSql);
 
 ?>
- 
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> 
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
 
 <form method="post" action="" name="">
@@ -59,14 +59,14 @@ $recCount = $ConMysql->record_count($sSql);
 
 <script type="text/javascript">
 function fncSubmit2() {
-    if (document.getElementById('detail_id').value == "") 
-    {
+    if (document.getElementById('detail_id').value == "") {
         alert('กรุณากรอกข้อมูลให้ถูกต้อง');
         return false;
     }
 }
 </script>
-<form method="post" action="/repair/recive-repair/Insert_status.php" name="frmInsertStatus" onSubmit="JavaScript:return fncSubmit2();">
+<form method="post" action="/repair/recive-repair/Insert_status.php" name="frmInsertStatus"
+    onSubmit="JavaScript:return fncSubmit2();">
     <div id="myModal" class="modal modal-child fade addNewRequestModal" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
         <div class="modal-dialog modal-md">
@@ -82,7 +82,7 @@ function fncSubmit2() {
                         <select class="form-control" name="sellist1" id="sellist1">
                             <!-- <option>------------------ เลือก ------------------</option> -->
                             <?php  
-                            $SQL = "SELECT * FROM r_category WHERE id BETWEEN '2'AND'10'";
+                            $SQL = "SELECT * FROM r_category WHERE id  BETWEEN '2'AND'10' ";
                             $arrData2 = $ConMysql->return_sql($SQL);
                             $recCount2 = $ConMysql->record_count($SQL);
                                                 if($recCount2>0)
@@ -91,9 +91,12 @@ function fncSubmit2() {
                                                 {
                                                 //print $arrData[$sLoop][0] . "-" .  $arrData[$sLoop][1] . "";
                                             ?>
-                            <option value="<?=$arrData2[$sLoop2][2]?>"><?=$arrData2[$sLoop2][3]?></option>
+                            <option value="<?=$arrData2[$sLoop2][2]?>"
+                                <?php /*if($arrData2[$sLoop2][0]==9){ echo "selected";}*/?>>
+                                <?=$arrData2[$sLoop2][3]?></option>
                             <?php }}?>
-                        </select></div>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label>รายละเอียด</label>
                         <textarea class="form-control" name="detail" id="detail_id" cols="50" rows="5"></textarea>
@@ -108,8 +111,8 @@ function fncSubmit2() {
                 <div class="modal-footer">
 
                     <input type="hidden" name="id" id="id" />
-                    <input type="submit" class="btn btn-primary" value="Save">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="บันทึก">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
         </div>
@@ -122,7 +125,7 @@ function fncSubmit2() {
 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
     <thead>
         <tr>
-        <th>ลำดับ</th>
+            <th>ลำดับ</th>
             <th>รายการ</th>
             <th>เลขครุภัณฑ์</th>
             <th>อาการ/สาเหตุ</th>
@@ -156,13 +159,14 @@ function fncSubmit2() {
                 <button type="button" class="btn btn-info "
                     onclick="window.location.href = '?module=data-history-detail&&detailID=<?=$arrData[$sLoop][0]?>';"
                     title="รายละเอียด">
-                    <!--i class="fas fa-database"--><i class="fas fa-edit"></i> </button>
-                
+                    <!--i class="fas fa-database"--><i class="fas fa-edit"></i>
+                </button>
+
                 <button type="button" class="btn btn-danger edit " title="ดำเนินการ" data-toggle="modal"
-                    data-target="#myModal" id="<?=$arrData[$sLoop][0]?>" fname="<?=$arrData[$sLoop][3]?>"><i
-                        class="fas fa-desktop"></i></button>
+                    data-target="#myModal" id="<?=$arrData[$sLoop][0]?>" fname="<?=$arrData[$sLoop][3]?>"
+                    status="<?=$arrData[$sLoop][9]?>"><i class="fas fa-desktop"></i></button>
             </td>
-            
+
 
 
         </tr><?php  } }?>
@@ -206,13 +210,16 @@ $(document).ready(function() {
         });
     }); */
 
-   // $('.edit').on('click', function() {
-        $("body").on("click", ".edit", function(event){ 
+    // $('.edit').on('click', function() {
+    $("body").on("click", ".edit", function(event) {
         var uid = $(this).attr("id");
+        var ustatus = $(this).attr("status");
         //var fname = $(this).attr("fname");
         $('#id').val(uid);
+        $('#status').val(ustatus);
         //$('#name').val(fname);
         document.getElementById("showText").innerHTML = $(this).attr("fname"); //"HELLO";
+        document.getElementById("status").innerHTML = $(this).attr("status");
     });
 });
 </script>
@@ -220,4 +227,4 @@ $(document).ready(function() {
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> 
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
