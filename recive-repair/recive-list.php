@@ -35,7 +35,7 @@ $recCount = $ConMysql->record_count($sSql);
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
 
-<form method="post" action="" name="">
+<!-- <form method="post" action="" name="">
 
     <div id="repairDetail" class="modal modal-child fade  bd-example-modal-lg" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
@@ -55,7 +55,7 @@ $recCount = $ConMysql->record_count($sSql);
     </div>
 
 
-</form>
+</form> -->
 
 <script type="text/javascript">
 function fncSubmit2() {
@@ -65,6 +65,7 @@ function fncSubmit2() {
     }
 }
 </script>
+
 <form method="post" action="/repair/recive-repair/Insert_status.php" name="frmInsertStatus"
     onSubmit="JavaScript:return fncSubmit2();">
     <div id="myModal" class="modal modal-child fade addNewRequestModal" tabindex="-1" role="dialog"
@@ -77,51 +78,15 @@ function fncSubmit2() {
                 </div>
                 <div class="modal-body">
 
-                    <div class="form-group">
-                        <label>สถานะ</label>
-                        <select class="form-control" name="sellist1" id="sellist1">
-                            <!-- <option>------------------ เลือก ------------------</option> -->
-                            <?php  
-                            $SQL = "SELECT * FROM r_category WHERE id  BETWEEN '2'AND'10' ";
-                            $arrData2 = $ConMysql->return_sql($SQL);
-                            $recCount2 = $ConMysql->record_count($SQL);
-                                                if($recCount2>0)
-                                                {
-                                                    for ($sLoop2=0;$sLoop2<$recCount2;$sLoop2++)
-                                                {
-                                                //print $arrData[$sLoop][0] . "-" .  $arrData[$sLoop][1] . "";
-                                            ?>
-                            <option value="<?=$arrData2[$sLoop2][2]?>"
-                                <?php /*if($arrData2[$sLoop2][0]==9){ echo "selected";}*/?>>
-                                <?=$arrData2[$sLoop2][3]?></option>
-                            <?php }}?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>รายละเอียด</label>
-                        <textarea class="form-control" name="detail" id="detail_id" cols="50" rows="5"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>ราคา</label>
-                        <!--<input type="number" name="price" id="price" /> -->
-                        <input type="number" name="price" placeholder="1.0" step="0.01" min="0" max="10000" id="price">
-                    </div>
-
                 </div>
                 <div class="modal-footer">
-
-                    <input type="hidden" name="id" id="id" />
                     <input type="submit" class="btn btn-primary" value="บันทึก">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
         </div>
     </div>
-
-
 </form>
-
-
 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
     <thead>
         <tr>
@@ -164,6 +129,10 @@ function fncSubmit2() {
 
                 <button type="button" class="btn btn-danger edit " title="ดำเนินการ" data-toggle="modal"
                     data-target="#myModal" id="<?=$arrData[$sLoop][0]?>" fname="<?=$arrData[$sLoop][3]?>"
+                    status="<?=$arrData[$sLoop][9]?>" style="display:none"><i class="fas fa-desktop"></i></button>
+
+                <button type="button" class="btn btn-danger repair " title="ดำเนินการ" data-toggle="modal"
+                    data-target="#myModal" id="<?=$arrData[$sLoop][0]?>" fname="<?=$arrData[$sLoop][3]?>"
                     status="<?=$arrData[$sLoop][9]?>"><i class="fas fa-desktop"></i></button>
             </td>
 
@@ -185,7 +154,6 @@ function fncSubmit2() {
         </tr>
     </tfoot>
 </table>
-
 <script>
 $(document).ready(function() {
     $('#example').DataTable();
@@ -211,16 +179,49 @@ $(document).ready(function() {
     }); */
 
     // $('.edit').on('click', function() {
-    $("body").on("click", ".edit", function(event) {
-        var uid = $(this).attr("id");
+    /* $("body").on("click", ".edit", function(event) {
+         var uid = $(this).attr("id");
+         var ustatus = $(this).attr("status");
+         //var fname = $(this).attr("fname");
+         $('#id').val(uid);
+         $('#status').val(ustatus);
+         //$('#name').val(fname);
+         document.getElementById("showText").innerHTML = $(this).attr("fname"); //"HELLO";
+         document.getElementById("status").innerHTML = $(this).attr("status");
+     });*/
+
+    $("body").on("click", ".repair", function(event) {
+        /*var userid = $(this).attr('id2');
+        var hname = $(this).attr('hname');
+        var Officename = $(this).attr('Officename');
+        var HardwareCode = $(this).attr('HardwareCode');
+        var OfficeID = $(this).attr('OfficeID');
+        var HardwareID = $(this).attr('HardwareID');*/
+        var id = $(this).attr("id");
         var ustatus = $(this).attr("status");
-        //var fname = $(this).attr("fname");
-        $('#id').val(uid);
-        $('#status').val(ustatus);
-        //$('#name').val(fname);
-        document.getElementById("showText").innerHTML = $(this).attr("fname"); //"HELLO";
-        document.getElementById("status").innerHTML = $(this).attr("status");
+        var fname = $(this).attr("fname");
+        document.getElementById("showText").innerHTML = $(this).attr("fname");
+
+        // AJAX request
+        $.ajax({
+            url: 'recive-repair/recive-detail.php',
+            type: 'post',
+            data: {
+                id: id,
+                fname: fname,
+                ustatus: ustatus
+            },
+            success: function(response) {
+                // Add response in Modal body
+                $('.modal-body').html(response);
+
+                // Display Modal
+                $('#DurableRepair').modal('show');
+            }
+        });
     });
+
+
 });
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

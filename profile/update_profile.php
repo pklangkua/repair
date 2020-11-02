@@ -14,9 +14,24 @@
   //$id = $_POST['id'];
 
   $conn = new connectDB;
-  $sSql = "UPDATE r_user SET phone = '$phone',email = '$email',OfficeID = '$OfficeID' WHERE id=$id";
-  $conn->exe($sSql);
-  
+  if($OfficeID=='')
+  {
+    echo "error";
+  }else{
+    $SQL="SELECT OfficeName FROM r_office WHERE OfficeID='$OfficeID' ";
+
+    $arrData = $conn->return_sql($SQL);
+    $recCount = $conn->record_count($SQL);
+    if($recCount>0){
+      for ($sLoop=0;$sLoop<$recCount;$sLoop++)
+      {
+            $OfficeName = $arrData[$sLoop][0] ;
+      }
+    }
+  $sSql = "UPDATE r_user SET phone = '$phone',email = '$email',OfficeID = '$OfficeID',department='$OfficeName' WHERE id=$id";
+ 
+  }
+    $conn->exe($sSql);
     header("Location:/repair/index.php?module=profile");
 
  ?>

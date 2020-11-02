@@ -30,7 +30,7 @@ $recCount = $ConMysql->record_count($sSql);
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> 
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
 <div class="card">
     <div class="card-header">
@@ -52,7 +52,7 @@ $recCount = $ConMysql->record_count($sSql);
                         </tr>
                     </thead>
                     <tbody>
-                    <?php   if($recCount>0){
+                        <?php   if($recCount>0){
 	                        for ($sLoop=0;$sLoop<$recCount;$sLoop++){
 	                ?>
                         <tr>
@@ -69,10 +69,10 @@ $recCount = $ConMysql->record_count($sSql);
                         <tr>
                             <th>พัสดุ</th>
                             <th>วันที่แจ้งซ่อม</th>
-                            <th>วันที่รับซ่อม</th>
-                            <th>ผู้ปฎิบัติงาน</th>
-                            <th>สถานะการซ่อม</th>
+                            <th>วันที่บันทึกการซ่อม</th>
                             <th>รายละเอียด</th>
+                            <th>สถานะการซ่อม</th>
+                            <th>ผู้ปฎิบัติงาน</th>
                         </tr>
                     </tfoot>
                 </table>

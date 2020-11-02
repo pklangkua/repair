@@ -86,7 +86,7 @@ $_SESSION['OfficeID'] = $OfficeID;
                         <a class="dropdown-item" href="?module=recive"
                             <?php if($st==3){ echo 'style="display:none"';}?>>งานรับแจ้งซ่อม</a>
                         <a class="dropdown-item" href="?module=ict"
-                            <?php if($OfficeID<>13 || $st==3){ echo 'style="display:none"';}?>>งานส่งต่อสำนักเทค</a>
+                            <?php if($OfficeID<>13 || $st==3){ echo 'style="display:none"';}?>>งานส่งต่อสำนักเทคโนโลยีสารสนเทศ</a>
 
                     </div>
                 </li>

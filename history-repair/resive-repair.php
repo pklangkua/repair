@@ -62,25 +62,6 @@ $(document).ready(function() {
     });
 });
 </script>
-<!-- <div class="card border-light mb-3" style="max-width:">
-    <div class="card-header">แจ้งซ่อม/เพิ่ม</div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-sm-4">
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <select class="form-control" name="HardwareType" id="HardwareType">
-                        <option value="0" selected="selected">---เลือก---</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-4">
-            </div>
-        </div>
-    </div>
-</div>
-</div> -->
 <script type="text/javascript">
 function fncSubmit()
 {
@@ -111,7 +92,7 @@ function fncSubmit()
                             <form method="post" action="?module=resive-repair">
                                 <div class="form-group">
                                     <label for="comment" class="mr-sm-2"> พัสดุ </label><font color="red"> * กรุณากรอกข้อมูล </font>
-                                    <input type="text" class="form-control mr-sm-2" name="HardwareName"
+                                    <input type="text"  class="form-control mr-sm-2" name="HardwareName"
                                         placeholder="ค้นหาพัสดุโดย ชื่อ,เลขทะเบียน" id="autocomplete">
                                     <br><label class="mr-sm-2" >เลขทะเบียน </label>
                                     <input type="text" class="form-control" name="HardwareCode" placeholder="เลขทะเบียน"
@@ -157,11 +138,11 @@ function fncSubmit()
     </div>
 </form>
 <script type='text/javascript'>
-$(document).ready(function() {
+/* $(document).ready(function() {
     $(function() {
 
     })
-})
+}) */
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

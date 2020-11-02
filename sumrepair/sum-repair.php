@@ -2,7 +2,7 @@
 if($st=='1' || $st=='2')
 { ?>
     <div class="card border-light mb-3" style="max-width:">
-    <div class="card-header">งานส่งต่อสำนักเทค</div>
+    <div class="card-header">การแจ้งซ่อมทั้งหมด</div>
     <div class="card-body">
         <div class="row">
             <div class="col">

@@ -26,38 +26,24 @@ $recCount3 = $conn->record_count($sSql3);
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
 <form method="post" action="/repair/member/edit_status.php" name="frmEdit">
-    <div id="myModal" class="modal modal-child fade addNewRequestModal" tabindex="-1" role="dialog"
+<div id="myModal" class="modal modal-child fade addNewRequestModal" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Edit User Status </h4>
+                    <h4 class="modal-title" id="myModalLabel">ปรับปรุง : สถานะการใช้งาน
+                    </h4>
                 </div>
                 <div class="modal-body">
 
-                    <div class="form-group">
-                        <select class="form-control" name="sellist1">
-                            <?php  
-                                                if($recCount2>0)
-                                                {
-                                                    for ($sLoop=0;$sLoop<$recCount2;$sLoop++)
-                                                {
-                                            ?>
-                            <option value="<?=$arrData2[$sLoop][0]?>"><?=$arrData2[$sLoop][1]?></option>
-                            <?php }}?>
-                        </select>
-                    </div>
-
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="id" id="id" />
-                    <input type="submit" class="btn btn-primary" value="Save">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="บันทึก">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
         </div>
     </div>
-
 
 </form>
 
@@ -67,15 +53,15 @@ $recCount3 = $conn->record_count($sSql3);
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Delete User </h4>
+                    <h4 class="modal-title">ลบสมาชิก </h4>
                 </div>
                 <div class="modal-body">
-                    <h6>หากคุณต้องการที่จะลบให้กด Delete</h6>
+                    <h6>หากคุณต้องการที่จะลบให้กด ลบ</h6>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="idDelete" id="idDelete" />
-                    <input type="submit" class="btn btn-danger" value="Delete">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-danger" value="ลบ">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
         </div>
@@ -111,8 +97,8 @@ $recCount3 = $conn->record_count($sSql3);
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="idUpdate" id="idUpdate"  />
-                    <input type="submit" class="btn btn-primary" value="Save">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="บันทึก">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
         </div>
@@ -160,14 +146,14 @@ $recCount3 = $conn->record_count($sSql3);
                 echo "<span class='badge badge-primary '>".$arrData[$sLoop][6]."</span>";
             }else
             {
-                echo "<span class='badge badge-secondary '>"."ผู้ใช้งาน"."</span>";
+                echo "<span class='badge badge-secondary '>".$arrData[$sLoop][6]."</span>";
             }
             
             ?>
             </td>
             <td>
                 <button type="button" class="btn btn-primary btn-sm  edit" data-toggle="modal" data-target="#myModal"
-                    id="<?=$arrData[$sLoop][0]?>">สถานะ</button>
+                    id="<?=$arrData[$sLoop][0]?>" status="<?=$arrData[$sLoop][5]?>">สถานะ</button>
                 <button type="button" class="btn btn-danger btn-sm delete" data-toggle="modal"
                     data-target="#DeleteModal" id="<?=$arrData[$sLoop][0]?>"><i class="fa fa-trash"></i> ลบ</button>
             </td>
@@ -191,11 +177,11 @@ $recCount3 = $conn->record_count($sSql3);
 $(document).ready(function() {
     $('#example').DataTable();
 
-    $("body").on("click", ".edit", function(event) {
-    /*$('.edit').on('click', function() {*/
+   /* $("body").on("click", ".edit", function(event) {
         var uid = $(this).attr("id");
         $('#id').val(uid);
-    });
+    });*/
+
     $("body").on("click", ".delete", function(event) {
     //$('.delete').on('click', function() {
         var uid = $(this).attr("id");
@@ -205,6 +191,35 @@ $(document).ready(function() {
     //$('.update').on('click', function() {
         var uid = $(this).attr("id");
         $('#idUpdate').val(uid);
+    });
+
+    $("body").on("click", ".edit", function(event) {
+        /*var userid = $(this).attr('id2');
+        var hname = $(this).attr('hname');
+        var Officename = $(this).attr('Officename');
+        var HardwareCode = $(this).attr('HardwareCode');
+        var OfficeID = $(this).attr('OfficeID');
+        var HardwareID = $(this).attr('HardwareID');*/
+        var id = $(this).attr("id");
+        var ustatus = $(this).attr("status");
+        var fname = $(this).attr("fname");
+        // AJAX request
+        $.ajax({
+            url: 'member/editAjax.php',
+            type: 'post',
+            data: {
+                id: id,
+                fname: fname,
+                ustatus: ustatus
+            },
+            success: function(response) {
+                // Add response in Modal body
+                $('.modal-body').html(response);
+
+                // Display Modal
+                $('#DurableRepair').modal('show');
+            }
+        });
     });
 
 
