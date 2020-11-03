@@ -56,7 +56,18 @@ $recCount = $ConMysql->record_count($sSql);
 
 </form>
 
-<form method="post" action="/repair/history-repair/Insert_status.php" name="frmInsertStatus">
+<script type="text/javascript">
+function checkNull() {
+    var forms = document.frmInsertStatus;
+    if (forms.detail.value == "") {
+        alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+        //forms.username.focus();
+        return false;
+    }
+}
+</script>
+
+<form method="post" action="/repair/history-repair/Insert_status.php" name="frmInsertStatus" onsubmit="javascript:return checkNull();">
     <div id="myModal" class="modal modal-child fade addNewRequestModal" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
         <div class="modal-dialog modal-md">
@@ -86,7 +97,8 @@ $recCount = $ConMysql->record_count($sSql);
                         </select></div>
                     <div class="form-group">
                         <label>รายละเอียด</label>
-                        <textarea class="form-control" name="detail" id="" cols="50" rows="5"></textarea>
+                        <font color="red"> * กรุณากรอกข้อมูล </font>
+                        <textarea class="form-control" name="detail" id=detail"" cols="50" rows="5"></textarea>
                     </div>
 
                 </div>

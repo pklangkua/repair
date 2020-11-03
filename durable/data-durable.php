@@ -42,12 +42,12 @@ $recCount = $conn2->record_count($sSql);
     }
 ?>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> -->
 <!--
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
@@ -81,14 +81,17 @@ $recCount = $conn2->record_count($sSql);
 
 </form>
 <script type="text/javascript">
-function fncSubmit2() {
-    if (document.getElementById('textarea').value == "") {
-        alert(document.getElementById('textarea').value);
+function checkNull() {
+    var forms = document.frmRepair;
+    if (forms.detail.value == "") {
+        alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+        //forms.username.focus();
         return false;
     }
 }
 </script>
-<form method="post" action="history-repair/insert_repair.php" name="frmRepair" onSubmit="JavaScript:return fncSubmit2();">
+<form method="post" action="history-repair/insert_repair.php" onsubmit="javascript:return checkNull();"
+    name="frmRepair">
 
     <div id="DurableRepair" class="modal modal-child fade  bd-example-modal-lg" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
@@ -101,7 +104,7 @@ function fncSubmit2() {
 
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary" value="บันทึก">
+                    <input type="submit" class="btn btn-primary saves" value="บันทึก">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
@@ -216,8 +219,8 @@ $(document).ready(function() {
 });
 </script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> -->

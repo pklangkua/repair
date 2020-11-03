@@ -20,6 +20,20 @@ $query = "SELECT * FROM HardwareTypeGroup";
 <script>
 $(document).ready(function() {
 
+    $('#autocomplete').keypress(function() {
+        /* alert('The option with value ' + $(this).val() + ' and text ' + $(this).text() +
+             ' was selected.');*/
+        $('#selectuser_id').val('');
+        $('#office').val('');
+    });
+    $('#autocomplete').keyup(function(e) {
+        if(e.keyCode == 46||e.keyCode == 8||e.keyCode == 32) {
+        $('#autocomplete').val('');
+        $('#selectuser_id').val('');
+        $('#office').val('');
+        }
+    });
+
     $("#autocomplete").autocomplete({
         //source: availableTags
 
@@ -63,14 +77,11 @@ $(document).ready(function() {
 });
 </script>
 <script type="text/javascript">
-function fncSubmit()
-{
-    if(document.getElementById('comment').value == ""  )
-    {
+function fncSubmit() {
+    if (document.getElementById('comment').value == "") {
         alert('กรุณากรอกข้อมูลให้ถูกต้อง');
         return false;
-    }else if(document.getElementById('selectuser_id').value == "")
-    {
+    } else if (document.getElementById('selectuser_id').value == "") {
         alert('กรุณากรอกข้อมูลเลขทะเบียนให้ถูกต้อง');
         return false;
     }
@@ -91,10 +102,12 @@ function fncSubmit()
                         <div class="card-body ">
                             <form method="post" action="?module=resive-repair">
                                 <div class="form-group">
-                                    <label for="comment" class="mr-sm-2"> พัสดุ </label><font color="red"> * กรุณากรอกข้อมูล </font>
-                                    <input type="text"  class="form-control mr-sm-2" name="HardwareName"
+                                    <label for="comment" class="mr-sm-2"> ครุภัณฑ์ </label>
+                                    <font color="red"> * กรุณากรอกข้อมูล </font>
+                                    <input type="text" class="form-control mr-sm-2 onchange" name="HardwareName"
                                         placeholder="ค้นหาพัสดุโดย ชื่อ,เลขทะเบียน" id="autocomplete">
-                                    <br><label class="mr-sm-2" >เลขทะเบียน </label>
+                                    <br><label class="mr-sm-2">เลขทะเบียน </label>
+                                    <font color="red"> * กรุณากรอกข้อมูล </font><font color="green"> (ข้อมูลจากการเลือกครุภัณฑ์) </font>
                                     <input type="text" class="form-control" name="HardwareCode" placeholder="เลขทะเบียน"
                                         id="selectuser_id" readonly>
                                 </div>
@@ -108,7 +121,8 @@ function fncSubmit()
                                 </div>
                                 <div class="form-group">
                                     <br>
-                                    <label for="comment">รายละเอียดการซ่อม/ปัญหา</label><font color="red"> * กรุณากรอกข้อมูล </font>
+                                    <label for="comment">รายละเอียดการซ่อม/ปัญหา</label>
+                                    <font color="red"> * กรุณากรอกข้อมูล </font>
                                     <textarea class="form-control" rows="5" id="comment" name="detail"></textarea>
                                 </div>
                                 <div class="form-group">

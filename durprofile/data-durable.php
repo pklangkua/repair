@@ -7,24 +7,7 @@ $sSql = "SELECT * from r_device where d_user ='$user'";
 //echo $sSql;
 $arrData = $conn2->return_sql($sSql);
 $recCount = $conn2->record_count($sSql);
-    /*if($recCount>0)
-    {
-        for ($sLoop=0;$sLoop<$recCount;$sLoop++)
-            {
-                $HardwareID = $arrData[$sLoop][1]; 
-            }
-    }
-    
-        $stmt = "SELECT h.*,ht.HardwareTypeName,htg.HardwareTypeGroupName,
-        dbo.Office.OfficeName
-        FROM
-        dbo.Hardware AS h
-        INNER JOIN dbo.HardwareType AS ht ON ht.HardwareTypeID = h.HardwareTypeID
-        INNER JOIN HardwareTypeGroup AS htg ON htg.HardwareTypeGroupID = ht.HardwareTypeGroupID 
-        INNER JOIN dbo.Office ON dbo.Office.OfficeID = h.OfficeID WHERE h.HardwareID = '$HardwareID'  ";
-        $query = sqlsrv_query( $conn, $stmt);
-        $i=1;*/
-    //}
+   
 ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
@@ -33,16 +16,6 @@ $recCount = $conn2->record_count($sSql);
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-<!--
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script> -->
 
 <form method="post" action="" name="frmDetail">
 
@@ -62,8 +35,6 @@ $recCount = $conn2->record_count($sSql);
             </div>
         </div>
     </div>
-
-
 </form>
 
 <form method="post" action="history-repair/insert_repair.php"   name="frmRepair">
@@ -75,7 +46,7 @@ $recCount = $conn2->record_count($sSql);
                 <div class="modal-header">
                     <h4 class="modal-title" id="DurableRepair">แจ้งซ่อม </h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body">       
 
                 </div>
                 <div class="modal-footer">
@@ -114,13 +85,12 @@ $recCount = $conn2->record_count($sSql);
         INNER JOIN dbo.HardwareType AS ht ON ht.HardwareTypeID = h.HardwareTypeID
         INNER JOIN HardwareTypeGroup AS htg ON htg.HardwareTypeGroupID = ht.HardwareTypeGroupID 
         INNER JOIN dbo.Office ON dbo.Office.OfficeID = h.OfficeID WHERE h.HardwareID = '$HardwareID'  ";
-        //echo $stmt;
+        //echo $stmt,"<br>";
         $query = sqlsrv_query( $conn, $stmt);
-        $i=1;
     ?>
         <?php while ($result = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)){  ?>
         <tr>
-            <td><?=$i?></td>
+            <td><?=$sLoop+1?></td>
             <td><?=$result['HardwareCode']?></td>
             <td><?=$result['HardwareName']?></td>
             <td><?=$result['HardwareTypeGroupName']?></td>
@@ -140,7 +110,7 @@ $recCount = $conn2->record_count($sSql);
                     <i class="fas fa-edit"></i> แจ้งซ่อม</button>
             </td>
         </tr>
-        <?php $i++; }}}?>
+        <?php  }}}?>
     </tbody>
     <tfoot>
         <tr>

@@ -56,7 +56,7 @@ $recCount3 = $conn->record_count($sSql3);
                     <h4 class="modal-title">ลบสมาชิก </h4>
                 </div>
                 <div class="modal-body">
-                    <h6>หากคุณต้องการที่จะลบให้กด ลบ</h6>
+                    <h6>หากคุณต้องการที่จะลบ</h6><div id="showText"></div><h6>ใช่หรือไม่</h6>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="idDelete" id="idDelete" />
@@ -155,7 +155,7 @@ $recCount3 = $conn->record_count($sSql3);
                 <button type="button" class="btn btn-primary btn-sm  edit" data-toggle="modal" data-target="#myModal"
                     id="<?=$arrData[$sLoop][0]?>" status="<?=$arrData[$sLoop][5]?>">สถานะ</button>
                 <button type="button" class="btn btn-danger btn-sm delete" data-toggle="modal"
-                    data-target="#DeleteModal" id="<?=$arrData[$sLoop][0]?>"><i class="fa fa-trash"></i> ลบ</button>
+                    data-target="#DeleteModal" id="<?=$arrData[$sLoop][0]?>" fname="<?=$arrData[$sLoop][1]?>"><i class="fa fa-trash"></i> ลบ</button>
             </td>
         </tr>
         <?php }}?>
@@ -186,6 +186,7 @@ $(document).ready(function() {
     //$('.delete').on('click', function() {
         var uid = $(this).attr("id");
         $('#idDelete').val(uid);
+        document.getElementById("showText").innerHTML = $(this).attr("fname");
     });
     $("body").on("click", ".update", function(event) {
     //$('.update').on('click', function() {

@@ -34,29 +34,6 @@ $recCount = $ConMysql->record_count($sSql);
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
-
-<!-- <form method="post" action="" name="">
-
-    <div id="repairDetail" class="modal modal-child fade  bd-example-modal-lg" tabindex="-1" role="dialog"
-        aria-labelledby="myLargeModalLabel" aria-hidden="true" data-modal-parent="#ViewDetailModal">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">รายละเอียด ครุภัณฑ์ </h4>
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</form> -->
-
 <script type="text/javascript">
 function fncSubmit2() {
     if (document.getElementById('detail_id').value == "") {
@@ -80,7 +57,7 @@ function fncSubmit2() {
 
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary" value="บันทึก">
+                    <input type="submit" class="btn btn-primary save" value="บันทึก">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
                 </div>
             </div>
@@ -135,9 +112,6 @@ function fncSubmit2() {
                     data-target="#myModal" id="<?=$arrData[$sLoop][0]?>" fname="<?=$arrData[$sLoop][3]?>"
                     status="<?=$arrData[$sLoop][9]?>"><i class="fas fa-desktop"></i></button>
             </td>
-
-
-
         </tr><?php  } }?>
     </tbody>
     <tfoot>
@@ -158,45 +132,15 @@ function fncSubmit2() {
 $(document).ready(function() {
     $('#example').DataTable();
 
-    /* $("body").on("click", ".detail", function(event) {
-        var detailID = $(this).attr('id');
-
-        // AJAX request
-        $.ajax({
-            url: 'history-repair/data-history-detail2.php',
-            type: 'post',
-            data: {
-                detailID: detailID
-            },
-            success: function(response) {
-                // Add response in Modal body
-                $('.modal-body').html(response);
-
-                // Display Modal
-                $('#DurableDetail').modal('show');
-            }
-        });
-    }); */
-
-    // $('.edit').on('click', function() {
-    /* $("body").on("click", ".edit", function(event) {
-         var uid = $(this).attr("id");
-         var ustatus = $(this).attr("status");
-         //var fname = $(this).attr("fname");
-         $('#id').val(uid);
-         $('#status').val(ustatus);
-         //$('#name').val(fname);
-         document.getElementById("showText").innerHTML = $(this).attr("fname"); //"HELLO";
-         document.getElementById("status").innerHTML = $(this).attr("status");
-     });*/
+     $("body").on("click", ".save", function(event) {
+        if (document.getElementById('detail_id').value == "") {
+        alert('กรุณากรอกข้อมูลให้ถูกต้อง');
+        return false;
+    }
+    });
 
     $("body").on("click", ".repair", function(event) {
-        /*var userid = $(this).attr('id2');
-        var hname = $(this).attr('hname');
-        var Officename = $(this).attr('Officename');
-        var HardwareCode = $(this).attr('HardwareCode');
-        var OfficeID = $(this).attr('OfficeID');
-        var HardwareID = $(this).attr('HardwareID');*/
+        
         var id = $(this).attr("id");
         var ustatus = $(this).attr("status");
         var fname = $(this).attr("fname");

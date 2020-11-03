@@ -34,6 +34,7 @@ $ustatus = $_POST['ustatus'];
 </div>
 <div class="form-group">
     <label>รายละเอียด</label>
+    <font color="red"> * กรุณากรอกข้อมูล </font>
     <textarea class="form-control" name="detail" id="detail_id" cols="50" rows="5"></textarea>
 </div>
 <div class="form-group">
